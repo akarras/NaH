@@ -1,0 +1,12 @@
+name: NaH
+main: net.supernoobs.nah.Nah
+version: ${version}
+author: [colorfulchew]
+commands:
+  nah:
+    description: Uses a warp
+    permission: nah.play
+    usage: /nah
+permissions:
+  nah.play:
+    default: true

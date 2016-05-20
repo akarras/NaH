@@ -77,8 +77,13 @@ public class Buttons {
 			return null;
 		}
 		GameSettings settings = game.getSettings();
-		meta.setLore(Arrays.asList(
-				"Score Limit: "+settings.getScoreLimit()));
+		List<String> lore = new ArrayList<String>();
+		lore.add("Score Limit: "+settings.getScoreLimit());
+		lore.add("Decks:");
+		for(String deck:settings.getDecks()){
+			lore.add(deck);
+		}
+		meta.setLore(lore);
 		stack.setItemMeta(meta);
 		return stack;
 	}

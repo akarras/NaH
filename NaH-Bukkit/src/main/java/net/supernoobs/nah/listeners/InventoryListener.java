@@ -8,7 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -32,7 +31,6 @@ public class InventoryListener implements Listener {
 			if(!event.getSlotType().equals(SlotType.CONTAINER)){
 				return;
 			}
-			
 			if(inventoryName.equals(Inventories.nahPrefix+"§aPick a Card")) {
 				event.setCancelled(true);
 				int clickedCard = event.getSlot()-19;
@@ -162,7 +160,11 @@ public class InventoryListener implements Listener {
 					return;
 				} else if(event.getCurrentItem().equals(Buttons.increaseRoundTimeButton())) {
 					GameSettings settings = user.getGame().getSettings();
-					settings.setRoundTime(settings.getRoundTime() + 1);
+					if(!event.isShiftClick()) {
+						settings.setRoundTime(settings.getRoundTime() + 10);
+					} else {
+						settings.setRoundTime(settings.getRoundTime() + 1);
+					}
 					user.updateGUI();
 					return;
 				} else if(event.getCurrentItem().equals(Buttons.backToLobbyButton())) {
@@ -186,21 +188,24 @@ public class InventoryListener implements Listener {
 					user.setMenuState(MenuState.Settings);
 					user.updateGUI();
 					return;
-				} else if(currentItem.equals(Buttons.nextPageButton())) {
-					GameSettings settings = user.getGame().getSettings();
-					settings.setCurrentDeckPage(settings.getCurrentDeckPage()+1);
-					user.updateGUI();
-				} else if(currentItem.equals(Buttons.previousPageButton())) {
-					GameSettings settings = user.getGame().getSettings();
-					settings.setCurrentDeckPage(settings.getCurrentDeckPage()-1);
-					user.updateGUI();
 				}
-				else if(currentItem.hasItemMeta()) {
-					if(currentItem.getItemMeta().hasDisplayName()) {
-						String packName = ChatColor.stripColor(currentItem.getItemMeta().getDisplayName());
-						user.getGame().getSettings().toggleDeck(packName);
+				if(user.isHost()){
+					if(currentItem.equals(Buttons.nextPageButton())) {
+						GameSettings settings = user.getGame().getSettings();
+						settings.setCurrentDeckPage(settings.getCurrentDeckPage()+1);
 						user.updateGUI();
-						return;
+					} else if(currentItem.equals(Buttons.previousPageButton())) {
+						GameSettings settings = user.getGame().getSettings();
+						settings.setCurrentDeckPage(settings.getCurrentDeckPage()-1);
+						user.updateGUI();
+					}
+					else if(currentItem.hasItemMeta()) {
+						if(currentItem.getItemMeta().hasDisplayName()) {
+							String packName = ChatColor.stripColor(currentItem.getItemMeta().getDisplayName());
+							user.getGame().getSettings().toggleDeck(packName);
+							user.updateGUI();
+							return;
+						}
 					}
 				}
 			} else if(inventoryName.contains(Inventories.nahPrefix)) {

@@ -2,6 +2,8 @@ package net.supernoobs.nah.game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.lang.StringUtils;
@@ -95,6 +97,8 @@ public class User {
 					}
 				} else if(state == GameState.SHOWROUNDWINNER) {
 					getPlayer().openInventory(Inventories.roundWinnerView(this));
+				} else if(state == GameState.SHOWGAMEWINNER) {
+					getPlayer().openInventory(Inventories.gameWinnerView(this));
 				}
 			}
 		}	
@@ -182,6 +186,10 @@ public class User {
 		if(this.wonCards.size() == 0)
 			return null;
 		return this.wonCards.lastEntry().getValue();
+	}
+	
+	public Set<Entry<BlackCard, List<WhiteCard>>> getWinningPlays() {
+		return this.wonCards.entrySet();
 	}
 	
 	public int getScore() {

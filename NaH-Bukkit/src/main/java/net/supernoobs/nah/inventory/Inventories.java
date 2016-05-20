@@ -1,6 +1,7 @@
 package net.supernoobs.nah.inventory;
 
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
@@ -10,6 +11,7 @@ import net.supernoobs.nah.Nah;
 import net.supernoobs.nah.data.JsonDeck;
 import net.supernoobs.nah.game.Game;
 import net.supernoobs.nah.game.User;
+import net.supernoobs.nah.game.cards.BlackCard;
 import net.supernoobs.nah.game.cards.WhiteCard;
 
 public class Inventories {
@@ -96,7 +98,15 @@ public class Inventories {
 	
 	public static Inventory gameWinnerView(User user) {
 		Inventory gameBoard = Bukkit.createInventory(user.getPlayer(), 27, nahPrefix+"§a"+user.getGame().getLastWinner().getName()+" won the game!");
-		gameBoard.setItem(9, Players.gamePlayer(user.getGame().getLastWinner()));
+		User gameWinner = user.getGame().getLastWinner();
+		gameBoard.setItem(4, Players.gamePlayer(gameWinner));
+		int curSlot = 9;
+		for(Entry<BlackCard,List<WhiteCard>> winningPlay:gameWinner.getWinningPlays()) {
+			//This will break with a score limit over 9, should look for alternatives.
+			gameBoard.setItem(curSlot+9, Cards.whiteCard(winningPlay.getValue()));
+			gameBoard.setItem(curSlot, Cards.blackCard(winningPlay.getKey()));
+			curSlot++;
+		}
 		return gameBoard;
 	}
 	

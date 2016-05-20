@@ -22,7 +22,7 @@ public class Nah extends JavaPlugin {
 	
 	public JsonDeckProvider jsonDecks;
 	
-	public Logger logger;
+	public Logger nahLogger;
 	public Settings settings;
 	
 	
@@ -33,7 +33,7 @@ public class Nah extends JavaPlugin {
 		gameManager = new GameManager();
 		userManager = new UserManager();
 		
-		logger = new Logger();
+		nahLogger = new Logger();
 		settings = new Settings();
 		
 		jsonDecks = new JsonDeckProvider();

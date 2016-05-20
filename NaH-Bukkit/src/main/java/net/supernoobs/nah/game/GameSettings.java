@@ -3,6 +3,8 @@ package net.supernoobs.nah.game;
 import java.util.HashSet;
 import java.util.Set;
 
+import net.supernoobs.nah.Nah;
+
 public class GameSettings {
 	public static final int MINIMUM_PLAYERS = 2;
 	public static final int MAXIMUM_PLAYERS = 7;
@@ -46,6 +48,8 @@ public class GameSettings {
 		return scoreLimit;
 	}
 	public void setScoreLimit(int scoreLimit) {
+		if(scoreLimit > Nah.plugin.settings.getMaxScoreLimit()) return;
+		if(scoreLimit <= 0) return;
 		this.scoreLimit = scoreLimit;
 	}
 	public String getGamePassword() {

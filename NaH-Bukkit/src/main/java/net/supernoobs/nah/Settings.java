@@ -7,7 +7,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import net.supernoobs.nah.Logger.LogLevel;
 
 public class Settings {
-	int loggingLevel;
+	private int loggingLevel;
+	private int maximumScoreLimit;
 	public Settings() {
 		//Check if the file exists or not
 		//If not, we should save it from our resources
@@ -19,7 +20,9 @@ public class Settings {
 		
 		FileConfiguration config = Nah.plugin.getConfig();
 		loggingLevel = config.getInt("settings.log-level");
+		maximumScoreLimit = config.getInt("settings.max-score-limit");
 	}
 	
 	public int getLoggingLevel(){ return loggingLevel; }
+	public int getMaxScoreLimit(){ return maximumScoreLimit; }
 }

@@ -10,6 +10,7 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
 import net.supernoobs.nah.Nah;
 import net.supernoobs.nah.Logger.LogLevel;
 
@@ -26,8 +27,12 @@ public class CardCastService {
 				
 			}*/
 			CardCastDeck deck = new CardCastDeck();
-			deck.parseCards(downloadViaStupidHackBecauseCardCast(cardsUrl));
-			deck.parseInfo(downloadViaStupidHackBecauseCardCast(deckInfoUrl));
+			if(!deck.parseCards(downloadViaStupidHackBecauseCardCast(cardsUrl))) {
+				return null;
+			}
+			if(!deck.parseInfo(downloadViaStupidHackBecauseCardCast(deckInfoUrl))) {
+				return null;
+			}
 			return deck;
 		} catch (Exception e) {
 			Nah.plugin.nahLogger.Log(LogLevel.CRITICAL, "Failed to parse deck!");

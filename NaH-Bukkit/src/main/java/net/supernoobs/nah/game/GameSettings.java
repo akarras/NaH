@@ -15,14 +15,25 @@ public class GameSettings {
 	public final int roundWarningTime = 3000;
 	private int currentDeckPage;
 	private Set<CardCastDeck> cardCastDecks;
+	private String host;
 	
-	public GameSettings(){
+	public GameSettings(String host){
 		enabledDecks = new HashSet<String>();
 		cardCastDecks = new HashSet<CardCastDeck>();
 		setScoreLimit(8);
 		enabledDecks.add(Nah.plugin.settings.getDefaultSet());
 		setRoundTime(Nah.plugin.settings.getDefaultIdleTime());
+		this.host = host;
 	}
+	
+	public Game getGame(){
+		return Nah.plugin.gameManager.getGame(host);
+	}
+	
+	public User getHost(){
+		return Nah.plugin.userManager.getUser(host);
+	}
+	
 	public Set<String> getDecks() {
 		return enabledDecks;
 	}
@@ -85,10 +96,14 @@ public class GameSettings {
 	
 	public void addCardCast(String cardCastCode) {
 		CardCastDeck deck = Nah.plugin.cardCast.DownloadDeck(cardCastCode);
-		cardCastDecks.add(deck);
-		Nah.plugin.nahLogger.Log(LogLevel.NORMAL, "Added cardcast deck "
-			+deck.getName()+" "+deck.getDescription()+" "
-			+deck.getBlackCards().size()+" black cards "
-			+deck.getWhiteCards().size()+" white cards");
+		if(deck != null) {
+			cardCastDecks.add(deck);
+			Nah.plugin.nahLogger.Log(LogLevel.NORMAL, "Added cardcast deck "
+				+deck.getName()+" "+deck.getDescription()+" "
+				+deck.getBlackCards().size()+" black cards "
+				+deck.getWhiteCards().size()+" white cards");
+		} else {
+			getHost().sendMessage("§cError getting CardCast deck");
+		}
 	}
 }

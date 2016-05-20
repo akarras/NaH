@@ -24,7 +24,7 @@ public class CardCastDeck extends CardDeck {
 		
 	}
 	
-	public void parseCards(Reader data) {
+	public boolean parseCards(Reader data) {
 		try{
 			JsonParser parser = new JsonParser();
 			JsonObject base = parser.parse(data).getAsJsonObject();
@@ -59,18 +59,25 @@ public class CardCastDeck extends CardDeck {
 				}
 				whiteCards.add(new WhiteCard(currentCardText));
 			}
-			
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			Nah.plugin.nahLogger.Log(LogLevel.CRITICAL, "Failed Parsing Deck");
+			return false;
 		}
 	}
 	
-	public void parseInfo(Reader data) {
+	public boolean parseInfo(Reader data) {
+		try {
 		JsonParser parser = new JsonParser();
 		JsonObject infoObject = parser.parse(data).getAsJsonObject();
 		name = infoObject.get("name").getAsString();
 		description = infoObject.get("description").getAsString();
+		return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
 	}
 	
 	@Override

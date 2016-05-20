@@ -48,7 +48,7 @@ public class Game implements Runnable {
 		this.players = new TreeMap<String,User>();
 		this.gameName = gameName;
 		state = GameState.LOBBY;
-		settings = new GameSettings();
+		settings = new GameSettings(gameName);
 	}
 	
 	
@@ -333,7 +333,7 @@ public class Game implements Runnable {
 
 	public GameSettings getSettings() {
 		if(settings == null){
-			settings = new GameSettings();
+			settings = new GameSettings(gameName);
 		}
 		return settings;
 	}

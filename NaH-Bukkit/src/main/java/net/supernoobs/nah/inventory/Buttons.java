@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -46,8 +47,13 @@ public class Buttons {
 		meta.setOwner(game.getGameName());
 		meta.setDisplayName("§a"+game.getGameName()+"'s game");
 		game.getSettings();
-		meta.setLore(Arrays.asList("§2"+game.getPlayers().size()+"/"+GameSettings.MAXIMUM_PLAYERS+" Players"
-				,"§2Click to join!"));
+		List<String> lore = new ArrayList<String>();
+		lore.add("§2"+game.getPlayers().size()+"/"+GameSettings.MAXIMUM_PLAYERS+" Players");
+		lore.add("§2Click to join!");
+		if(StringUtils.isNotBlank(game.getSettings().getGamePassword())) {
+			lore.add("§7Passworded");
+		}
+		meta.setLore(lore);
 		stack.setItemMeta(meta);
 		return stack;
 	}
@@ -79,7 +85,10 @@ public class Buttons {
 		GameSettings settings = game.getSettings();
 		List<String> lore = new ArrayList<String>();
 		lore.add("Score Limit: "+settings.getScoreLimit());
-		lore.add("Decks:");
+		lore.add("Enabled Decks:");
+		if(settings.getDecks().size() == 0) {
+			lore.add("No decks enabled");
+		}
 		for(String deck:settings.getDecks()){
 			lore.add(deck);
 		}

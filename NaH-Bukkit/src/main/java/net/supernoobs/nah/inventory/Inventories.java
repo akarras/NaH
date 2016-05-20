@@ -2,7 +2,6 @@ package net.supernoobs.nah.inventory;
 
 import java.util.List;
 import java.util.Map.Entry;
-
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import com.google.common.collect.BiMap;
@@ -10,6 +9,7 @@ import com.google.common.collect.BiMap;
 import net.supernoobs.nah.Nah;
 import net.supernoobs.nah.data.JsonDeck;
 import net.supernoobs.nah.game.Game;
+import net.supernoobs.nah.game.GameSettings;
 import net.supernoobs.nah.game.User;
 import net.supernoobs.nah.game.cards.BlackCard;
 import net.supernoobs.nah.game.cards.WhiteCard;
@@ -32,9 +32,28 @@ public class Inventories {
 		return gameSettings;
 	}
 	public static Inventory gameDeckSettings(User user) {
-		Inventory gameDeckSettings = Bukkit.createInventory(user.getPlayer(), 54, nahPrefix+"§eGame Decks");
-		for(JsonDeck deck:Nah.plugin.jsonDecks.getAvailablePacks().values()) {
+		Inventory gameDeckSettings = Bukkit.createInventory(user.getPlayer(), 36, nahPrefix+"§eGame Decks");
+		GameSettings settings = user.getGame().getSettings();
+		String[] packs = (String[]) Nah.plugin.jsonDecks.getAvailablePacks().keySet().
+				toArray(new String[Nah.plugin.jsonDecks.getAvailablePacks().keySet().size()]);
+		int displaySize = 27;
+		int start = settings.getCurrentDeckPage()*displaySize;
+		int end = start+displaySize;
+		boolean lastPage = false;
+		if(packs.length < end) {
+			end = packs.length -1;
+			lastPage = true;
+		}
+		for(int x = start; x<end; x++) {
+			String pack = packs[x];
+			JsonDeck deck = Nah.plugin.jsonDecks.getJsonDeck(pack);
 			gameDeckSettings.addItem(Buttons.deckToggleButton(deck, user));
+		}
+		if(!lastPage) {
+			gameDeckSettings.setItem(gameDeckSettings.getSize()-4, Buttons.nextPageButton());
+		}
+		if(settings.getCurrentDeckPage() > 0) {
+			gameDeckSettings.setItem(gameDeckSettings.getSize()-5, Buttons.previousPageButton());
 		}
 		gameDeckSettings.setItem(gameDeckSettings.getSize()-1,Buttons.backToLobbyButton());
 		gameDeckSettings.setItem(gameDeckSettings.getSize()-2,Buttons.SettingsMenuButton(user));

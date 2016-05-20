@@ -1,3 +1,4 @@
 settings:
   #Available log levels so far, Everything 1, Normal 3, Critical 5
   log-level: 3
+  max-score-limit: 15

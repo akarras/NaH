@@ -71,7 +71,7 @@ public class JsonDeckProvider {
 		
 	}
 	
-	public HashMap<String,JsonDeck> getAvailablePacks(){
+	public LinkedHashMap<String,JsonDeck> getAvailablePacks(){
 		return decks;
 	}
 	

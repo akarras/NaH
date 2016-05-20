@@ -145,6 +145,14 @@ public class InventoryListener implements Listener {
 					user.setMenuState(MenuState.Settings);
 					user.updateGUI();
 					return;
+				} else if(currentItem.equals(Buttons.nextPageButton())) {
+					GameSettings settings = user.getGame().getSettings();
+					settings.setCurrentDeckPage(settings.getCurrentDeckPage()+1);
+					user.updateGUI();
+				} else if(currentItem.equals(Buttons.previousPageButton())) {
+					GameSettings settings = user.getGame().getSettings();
+					settings.setCurrentDeckPage(settings.getCurrentDeckPage()-1);
+					user.updateGUI();
 				}
 				else if(currentItem.hasItemMeta()) {
 					if(currentItem.getItemMeta().hasDisplayName()) {

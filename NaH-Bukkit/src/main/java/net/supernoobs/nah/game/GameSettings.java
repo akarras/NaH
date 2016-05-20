@@ -13,7 +13,7 @@ public class GameSettings {
 	private String gamePassword;
 	private int roundTime;
 	public final int roundWarningTime = 3000;
-	
+	private int currentDeckPage;
 	
 	public GameSettings(){
 		enabledDecks = new HashSet<String>();
@@ -63,5 +63,11 @@ public class GameSettings {
 	}
 	public void setRoundTime(int roundTime) {
 		this.roundTime = roundTime;
+	}
+	public int getCurrentDeckPage() {
+		return currentDeckPage;
+	}
+	public void setCurrentDeckPage(int currentDeckPage) {
+		this.currentDeckPage = currentDeckPage;
 	}
 }

@@ -151,6 +151,22 @@ public class Buttons {
 		return stack;
 	}
 	
+	public static ItemStack nextPageButton() {
+		ItemStack stack = new ItemStack(Material.ARROW);
+		ItemMeta meta = stack.getItemMeta();
+		meta.setDisplayName("§eNext Page");
+		stack.setItemMeta(meta);
+		return stack;
+	}
+	
+	public static ItemStack previousPageButton() {
+		ItemStack stack = new ItemStack(Material.ARROW);
+		ItemMeta meta = stack.getItemMeta();
+		meta.setDisplayName("§ePrevious Page");
+		stack.setItemMeta(meta);
+		return stack;
+	}
+	
 	private static List<String> multiLine(String text, int length,ChatColor color) {
 		text.replaceAll("_", "____");
 		ArrayList<String> list = new ArrayList<String>();

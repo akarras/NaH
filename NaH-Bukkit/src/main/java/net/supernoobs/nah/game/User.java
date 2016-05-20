@@ -27,8 +27,8 @@ public class User {
 	private MenuState state;
 	private String enteredPassword;
 	
-	public User(HumanEntity player) {
-		this.name = player.getName();
+	public User(String player) {
+		this.name = player;
 		state = MenuState.MainMenu;
 	}
 
@@ -37,8 +37,11 @@ public class User {
 		getPlayer().sendMessage(message);
 	}
 	
-	public String getPassword(){ return enteredPassword; }
-	public void setPassword(String pass){ enteredPassword = pass; }
+	public String getPassword() { return enteredPassword; }
+	public void setPassword(String pass) { 
+		sendMessage("§aYou have set your password to "+pass);
+		enteredPassword = pass; 
+	}
 	
 	public boolean isHost() {
 		if(currentGame == name){

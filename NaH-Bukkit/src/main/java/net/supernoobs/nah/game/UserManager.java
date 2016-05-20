@@ -13,14 +13,18 @@ public class UserManager {
 		users = new HashMap<String,User>();
 	}
 	
-	public User getUser(HumanEntity humanEntity) {
-		String username = humanEntity.getName();
+	public User getUser(String username) {
 		if(!users.containsKey(username)) {
-			User newUser = new User(humanEntity);
+			User newUser = new User(username);
 			users.put(username, newUser);
 			return newUser;
 		}
 		return users.get(username);
+	}
+	
+	public User getUser(HumanEntity humanEntity) {
+		String username = humanEntity.getName();
+		return getUser(username);
 	}
 	
 	public void closeMenus() {

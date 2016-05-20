@@ -22,7 +22,6 @@ public class Settings {
 		File confFile = new File(Nah.plugin.getDataFolder()+File.separator+"config.yml");
 		if(!confFile.exists()) {
 			Nah.plugin.saveResource("config.yml", false);
-			Nah.plugin.nahLogger.Log(LogLevel.NORMAL, "Saved default config");
 		}
 		
 		FileConfiguration config = Nah.plugin.getConfig();

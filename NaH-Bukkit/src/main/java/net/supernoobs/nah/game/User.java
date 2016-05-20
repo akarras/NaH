@@ -1,11 +1,8 @@
 package net.supernoobs.nah.game;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -20,7 +17,7 @@ public class User {
 	private String name;
 	private String currentGame;
 	private List<WhiteCard> hand;
-	private TreeMap<BlackCard,List<WhiteCard>> wonCards;
+	private LinkedList<WinningPair> wonCards;
 	private final int maxHand = 7;
 	private int score;
 	private MenuState state;
@@ -153,7 +150,7 @@ public class User {
 	
 	public void gameStart(){
 		hand = new ArrayList<WhiteCard>();
-		wonCards = new TreeMap<BlackCard,List<WhiteCard>>();
+		wonCards = new LinkedList<WinningPair>();
 		setScore(0);
 	}
 	
@@ -185,17 +182,15 @@ public class User {
 	
 	public void wonCard(BlackCard blackCardWon, List<WhiteCard> winningHand) {
 		score++;
-		wonCards.put(blackCardWon, winningHand);
+		wonCards.add(new WinningPair(blackCardWon,winningHand));
 	}
 	
-	public Entry<BlackCard, List<WhiteCard>> getLastWinningPlay() {
-		if(this.wonCards.size() == 0)
-			return null;
-		return this.wonCards.lastEntry();
+	public WinningPair getLastWinningPlay() {
+		return this.wonCards.getLast();
 	}
 	
-	public Set<Entry<BlackCard, List<WhiteCard>>> getWinningPlays() {
-		return this.wonCards.entrySet();
+	public LinkedList<WinningPair> getWinningPlays() {
+		return wonCards;
 	}
 	
 	public int getScore() {
@@ -212,5 +207,26 @@ public class User {
 			return cards.size() == getGame().getCurrentBlackCard().getPick();
 		}
 		return false;
+	}
+	public class WinningPair{
+		private List<WhiteCard> whiteCards;
+		private BlackCard black;
+		public WinningPair(BlackCard black,List<WhiteCard> white) {
+			setWhiteCards(white);
+			this.setBlack(black);
+		}
+		public List<WhiteCard> getWhiteCards() {
+			return whiteCards;
+		}
+		public void setWhiteCards(List<WhiteCard> whiteCards) {
+			this.whiteCards = whiteCards;
+		}
+		public BlackCard getBlack() {
+			return black;
+		}
+		public void setBlack(BlackCard black) {
+			this.black = black;
+		}
+		
 	}
 }

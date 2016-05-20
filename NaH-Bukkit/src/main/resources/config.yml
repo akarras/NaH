@@ -7,3 +7,7 @@ settings:
     maximum: 600
     default: 60
     minimum: 10
+  #May seriously bug out if set over 7
+  player-count:
+    maximum: 7
+    minimum: 3

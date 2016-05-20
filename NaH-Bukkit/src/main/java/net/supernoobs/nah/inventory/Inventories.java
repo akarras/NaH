@@ -1,7 +1,6 @@
 package net.supernoobs.nah.inventory;
 
 import java.util.List;
-import java.util.Map.Entry;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import com.google.common.collect.BiMap;
@@ -11,7 +10,7 @@ import net.supernoobs.nah.data.JsonDeck;
 import net.supernoobs.nah.game.Game;
 import net.supernoobs.nah.game.GameSettings;
 import net.supernoobs.nah.game.User;
-import net.supernoobs.nah.game.cards.BlackCard;
+import net.supernoobs.nah.game.User.WinningPair;
 import net.supernoobs.nah.game.cards.WhiteCard;
 
 public class Inventories {
@@ -80,8 +79,8 @@ public class Inventories {
 		for(User player:game.getPlayers()){
 			lobby.addItem(Players.lobbyPlayer(player,user.isHost()));
 		}
+		lobby.setItem(lobby.getSize()-4, Buttons.SettingsMenuButton(user));
 		if(user.isHost()){
-			lobby.setItem(lobby.getSize()-4, Buttons.SettingsMenuButton(user));
 			lobby.setItem(lobby.getSize()-2, Buttons.StartGameButton());
 		}
 		lobby.setItem(lobby.getSize()-1, Buttons.LeaveGameButton());
@@ -114,8 +113,8 @@ public class Inventories {
 		Inventory gameBoard = Bukkit.createInventory(user.getPlayer(), 27, nahPrefix+"§a"+user.getGame().getLastWinner().getName()+" Won!");
 		User lastWinner = user.getGame().getLastWinner();
 		gameBoard.setItem(12, Players.roundWinner(lastWinner));
-		gameBoard.setItem(13, Cards.blackCard(user.getLastWinningPlay().getKey()));
-		gameBoard.setItem(14, Cards.whiteCard(user.getLastWinningPlay().getValue()));
+		gameBoard.setItem(13, Cards.blackCard(lastWinner.getLastWinningPlay().getBlack()));
+		gameBoard.setItem(14, Cards.whiteCard(lastWinner.getLastWinningPlay().getWhiteCards()));
 		return gameBoard;
 	}
 	
@@ -124,10 +123,10 @@ public class Inventories {
 		User gameWinner = user.getGame().getLastWinner();
 		gameBoard.setItem(4, Players.gamePlayer(gameWinner));
 		int curSlot = 9;
-		for(Entry<BlackCard,List<WhiteCard>> winningPlay:gameWinner.getWinningPlays()) {
+		for(WinningPair winningPlay:gameWinner.getWinningPlays()) {
 			//This will break with a score limit over 9, should look for alternatives.
-			gameBoard.setItem(curSlot+9, Cards.whiteCard(winningPlay.getValue()));
-			gameBoard.setItem(curSlot, Cards.blackCard(winningPlay.getKey()));
+			gameBoard.setItem(curSlot+9, Cards.whiteCard(winningPlay.getWhiteCards()));
+			gameBoard.setItem(curSlot, Cards.blackCard(winningPlay.getBlack()));
 			curSlot++;
 		}
 		return gameBoard;

@@ -2,7 +2,7 @@ package net.supernoobs.nah;
 
 public class Logger {
 	public void Log(LogLevel level, String message) {
-		if(Nah.plugin.settings.getLoggingLevel() >= level.getLevel()) {
+		if(Nah.plugin.settings.getLoggingLevel() <= level.getLevel()) {
 			Nah.plugin.getServer().getLogger().info(message);
 		}
 	}

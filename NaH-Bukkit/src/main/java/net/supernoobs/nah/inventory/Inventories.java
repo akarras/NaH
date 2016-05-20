@@ -123,7 +123,7 @@ public class Inventories {
 	public static Inventory gameWinnerView(User user) {
 		Inventory gameBoard = Bukkit.createInventory(user.getPlayer(), 27, nahPrefix+"§a"+user.getGame().getLastWinner().getName()+" won the game!");
 		User gameWinner = user.getGame().getLastWinner();
-		gameBoard.setItem(4, Players.gamePlayer(gameWinner));
+		gameBoard.setItem(4, Players.roundWinner(gameWinner));
 		int curSlot = 9;
 		for(WinningPair winningPlay:gameWinner.getWinningPlays()) {
 			//This will break with a score limit over 9, should look for alternatives.

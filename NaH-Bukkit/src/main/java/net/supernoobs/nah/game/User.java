@@ -202,6 +202,9 @@ public class User {
 	}
 	
 	public boolean hasPlayed() {
+		if(getGame().getGameState().equals(GameState.LOBBY)|getGame().getGameState().equals(GameState.SHOWGAMEWINNER)) {
+			return false;
+		}
 		if(getGame().getPlayedCards().containsKey(getName())) {
 			List<WhiteCard> cards = getGame().getPlayedCards().get(getName());
 			return cards.size() == getGame().getCurrentBlackCard().getPick();

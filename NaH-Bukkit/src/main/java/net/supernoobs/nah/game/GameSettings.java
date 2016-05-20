@@ -8,7 +8,7 @@ import net.supernoobs.nah.Logger.LogLevel;
 import net.supernoobs.nah.data.CardCastDeck;
 
 public class GameSettings {
-	public static final int MINIMUM_PLAYERS = 2;
+	public static final int MINIMUM_PLAYERS = 3;
 	public static final int MAXIMUM_PLAYERS = 7;
 	private Set<String> enabledDecks;
 	private int scoreLimit;
@@ -22,8 +22,8 @@ public class GameSettings {
 		enabledDecks = new HashSet<String>();
 		cardCastDecks = new HashSet<CardCastDeck>();
 		setScoreLimit(8);
-		enabledDecks.add("Base Set");
-		setRoundTime(60);
+		enabledDecks.add(Nah.plugin.settings.getDefaultSet());
+		setRoundTime(Nah.plugin.settings.getDefaultIdleTime());
 	}
 	public Set<String> getDecks() {
 		return enabledDecks;
@@ -74,6 +74,8 @@ public class GameSettings {
 		return roundTime;
 	}
 	public void setRoundTime(int roundTime) {
+		if(roundTime > Nah.plugin.settings.getMaxIdleTime()) { return; }
+		if(roundTime < Nah.plugin.settings.getMinimumIdleTime()) { return; }
 		this.roundTime = roundTime;
 	}
 	public int getCurrentDeckPage() {

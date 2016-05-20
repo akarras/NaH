@@ -145,6 +145,16 @@ public class InventoryListener implements Listener {
 					settings.setScoreLimit(settings.getScoreLimit() - 1);
 					user.updateGUI();
 					return;
+				} else if(event.getCurrentItem().equals(Buttons.decreaseRoundTimeButton())) {
+					GameSettings settings = user.getGame().getSettings();
+					settings.setRoundTime(settings.getRoundTime() - 1);
+					user.updateGUI();
+					return;
+				} else if(event.getCurrentItem().equals(Buttons.increaseRoundTimeButton())) {
+					GameSettings settings = user.getGame().getSettings();
+					settings.setRoundTime(settings.getRoundTime() + 1);
+					user.updateGUI();
+					return;
 				} else if(event.getCurrentItem().equals(Buttons.backToLobbyButton())) {
 					user.setMenuState(MenuState.Game);
 					user.updateGUI();

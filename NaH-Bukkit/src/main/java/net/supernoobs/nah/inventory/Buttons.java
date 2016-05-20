@@ -107,12 +107,25 @@ public class Buttons {
 		return stack;
 	}
 	
-	public static ItemStack increaseScoreLimitButton() {
-		ItemStack stack = new ItemStack(Material.WOOL,1,(short)5);
+	public static ItemStack increaseRoundTimeButton() {
+		return getWoolWithName("§eIncrease Round Time",(short)5);
+	}
+	
+	public static ItemStack currentRoundTimeButton(User user) {
+		ItemStack stack = new ItemStack(Material.WOOL,1,(short)1);
 		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName("§eIncrease Score Limit");
+		meta.setDisplayName("§eIdle Time");
+		meta.setLore(Arrays.asList("§e"+user.getGame().getSettings().getRoundTime()));
 		stack.setItemMeta(meta);
 		return stack;
+	}
+	
+	public static ItemStack decreaseRoundTimeButton() {
+		return getWoolWithName("§6Decrease Round Time",(short)14);
+	}
+	
+	public static ItemStack increaseScoreLimitButton() {
+		return getWoolWithName("§aIncrease Score Limit",(short)5);
 	}
 	
 	public static ItemStack currentScoreButton(User user) {
@@ -125,9 +138,16 @@ public class Buttons {
 	}
 	
 	public static ItemStack decreaseScoreLimitButton() {
-		ItemStack stack = new ItemStack(Material.WOOL,1,(short)14);
+		return getWoolWithName("§6Decrease Score Limit",(short)14);
+	}
+	
+	/*
+	 * 
+	 */
+	private static ItemStack getWoolWithName(String name, short woolColor){
+		ItemStack stack = new ItemStack(Material.WOOL,1,woolColor);
 		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName("§6Decrease Score Limit");
+		meta.setDisplayName(name);
 		stack.setItemMeta(meta);
 		return stack;
 	}

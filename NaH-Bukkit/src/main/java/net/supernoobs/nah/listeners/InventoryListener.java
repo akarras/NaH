@@ -151,7 +151,11 @@ public class InventoryListener implements Listener {
 					return;
 				} else if(event.getCurrentItem().equals(Buttons.decreaseRoundTimeButton())) {
 					GameSettings settings = user.getGame().getSettings();
-					settings.setRoundTime(settings.getRoundTime() - 1);
+					if(!event.isShiftClick()) {
+						settings.setRoundTime(settings.getRoundTime() - 10);
+					} else {
+						settings.setRoundTime(settings.getRoundTime() - 1);
+					}
 					user.updateGUI();
 					return;
 				} else if(event.getCurrentItem().equals(Buttons.increaseRoundTimeButton())) {

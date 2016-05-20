@@ -12,6 +12,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import net.supernoobs.nah.Logger.LogLevel;
 import net.supernoobs.nah.Nah;
 import net.supernoobs.nah.game.cards.BlackCard;
 import net.supernoobs.nah.game.cards.WhiteCard;
@@ -28,13 +29,13 @@ public class JsonDeckProvider {
 			obj = parser.parse(new FileReader(new File(jsonFolder+File.separator+"all.json"))).getAsJsonObject();
 			}
 		catch (Exception e) {
-			Nah.plugin.getLogger().info("Error parsing decks");
+			Nah.plugin.nahLogger.Log(LogLevel.CRITICAL,"Error parsing decks");
 		}
 		JsonArray allWhiteCards = obj.get("whiteCards").getAsJsonArray();
 		JsonArray allBlackCards = obj.get("blackCards").getAsJsonArray();
 		for(JsonElement element:obj.get("order").getAsJsonArray()) {
 			String deckName = element.getAsString();
-			Nah.plugin.getServer().getLogger().info("Loading "+deckName);
+			Nah.plugin.nahLogger.Log(LogLevel.EVERYTHING,"Loading "+deckName);
 			Set<WhiteCard> whiteCards = new HashSet<WhiteCard>();
 			Set<BlackCard> blackCards = new HashSet<BlackCard>();
 			JsonObject deck = obj.get(deckName).getAsJsonObject();

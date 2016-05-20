@@ -55,7 +55,7 @@ public class Game implements Runnable {
 	public void start(){
 		final GameSettings settings = getSettings();
 		//Game start prerequisite checks 
-		if(players.size() < Nah.plugin.settings.getMaximumPlayers()) {
+		if(players.size() < Nah.plugin.settings.getMinumumPlayers()) {
 			sendMessage("§cFailed to start, not enough players");
 			return;
 		}

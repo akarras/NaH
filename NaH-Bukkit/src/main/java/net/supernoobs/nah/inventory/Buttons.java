@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import net.md_5.bungee.api.ChatColor;
+import net.supernoobs.nah.Nah;
 import net.supernoobs.nah.data.CardCastDeck;
 import net.supernoobs.nah.data.JsonDeck;
 import net.supernoobs.nah.game.Game;
@@ -59,7 +60,7 @@ public class Buttons {
 		meta.setDisplayName("§a"+game.getGameName()+"'s game");
 		game.getSettings();
 		List<String> lore = new ArrayList<String>();
-		lore.add("§2"+game.getPlayers().size()+"/"+GameSettings.MAXIMUM_PLAYERS+" Players");
+		lore.add("§2"+game.getPlayers().size()+"/"+Nah.plugin.settings.getMaximumPlayers()+" Players");
 		lore.add("§2Click to join!");
 		if(StringUtils.isNotBlank(game.getSettings().getGamePassword())) {
 			lore.add("§7Passworded");

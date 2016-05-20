@@ -5,8 +5,6 @@ import java.io.File;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import net.supernoobs.nah.Logger.LogLevel;
-
 public class Settings {
 	private int loggingLevel;
 	private int maximumScoreLimit;

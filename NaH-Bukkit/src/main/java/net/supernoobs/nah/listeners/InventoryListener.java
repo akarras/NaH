@@ -106,6 +106,7 @@ public class InventoryListener implements Listener {
 								
 								User kickUser = Nah.plugin.userManager.getUser(playerName);
 								user.getGame().quitGame(kickUser);
+								user.getGame().updatePlayerGUIs();
 							}
 						}
 					}

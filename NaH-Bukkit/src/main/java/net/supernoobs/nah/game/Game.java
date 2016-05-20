@@ -266,7 +266,7 @@ public class Game implements Runnable {
 		updatePlayerGUIs();
 	}
 	
-	private void updatePlayerGUIs(){
+	public void updatePlayerGUIs(){
 		for(User player:players.values()) {
 			player.updateGUI();
 		}

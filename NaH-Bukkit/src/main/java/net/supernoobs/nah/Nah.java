@@ -55,6 +55,7 @@ public class Nah extends JavaPlugin {
 		if(label.equalsIgnoreCase("nah")) {
 			if(sender instanceof Player) {
 				User user = userManager.getUser((Player) sender);
+				user.playerRequestedOpen();
 				user.updateGUI();
 				if(args.length > 0) {
 					if(args[0].equals("set")) {

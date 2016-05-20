@@ -7,6 +7,8 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -214,5 +216,19 @@ public class InventoryListener implements Listener {
 				}
 			}
 		}
+	}
+	
+	@EventHandler
+	public void onInventoryClose(InventoryCloseEvent event) {
+		String inventoryName = event.getInventory().getName();
+		
+		if(inventoryName.contains(Inventories.nahPrefix)) {
+			User user = Nah.plugin.userManager.getUser(event.getPlayer());
+			user.playerClosedInventory();
+		}
+	}
+	@EventHandler
+	public void onInventoryOpen(InventoryOpenEvent event) {
+		
 	}
 }

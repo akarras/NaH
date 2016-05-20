@@ -11,3 +11,6 @@ settings:
   player-count:
     maximum: 7
     minimum: 3
+    
+#Do not change this!
+config-version: 1

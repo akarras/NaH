@@ -22,10 +22,17 @@ public class User {
 	private int score;
 	private MenuState state;
 	private String enteredPassword;
+	private boolean inventoryClosed;
+	private MenuState lastMenuState;
+	private GameState lastGameState;
+	private boolean inventoryUpdating;
 	
 	public User(String player) {
 		this.name = player;
 		state = MenuState.MainMenu;
+		lastMenuState = MenuState.MainMenu;
+		lastGameState = GameState.LOBBY;
+		inventoryClosed = false;
 	}
 
 	public void sendMessage(String message) {
@@ -56,6 +63,23 @@ public class User {
 	}
 	
 	public void updateGUI(){
+		//Check if the player has manually closed their inventory
+		if(inventoryClosed) {
+			//Only reopen the inventory if we have a new state
+			if(lastMenuState == state) {
+				if(isInGame()) {
+					if(lastGameState == getGame().getGameState()) {
+						return;
+					}
+				} else {
+					return;
+				}
+			} else {
+				inventoryClosed = false;
+			}
+		}
+		//Signal that the inventory is being updated
+		inventoryUpdating = true;
 		if(!isInGame()) {
 			switch(state) {
 			case BrowseGames:
@@ -104,7 +128,24 @@ public class User {
 					getPlayer().openInventory(Inventories.gameWinnerView(this));
 				}
 			}
-		}	
+		}
+		lastMenuState = state;
+		if(isInGame()) {
+			lastGameState = getGame().getGameState();
+		}
+	}
+	
+	public void playerClosedInventory() {
+		//Catch inventories being closed from state changes
+		if(inventoryUpdating) {
+			inventoryUpdating = false;
+			return;
+		}
+		inventoryClosed = true;
+	}
+	
+	public void playerRequestedOpen() {
+		inventoryClosed = false;
 	}
 	
 	public boolean isCzar(){

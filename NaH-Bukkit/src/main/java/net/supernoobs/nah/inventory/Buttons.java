@@ -97,6 +97,7 @@ public class Buttons {
 		GameSettings settings = game.getSettings();
 		List<String> lore = new ArrayList<String>();
 		lore.add("Score Limit: "+settings.getScoreLimit());
+		lore.add("Idle Time: "+settings.getRoundTime());
 		lore.add("Enabled Decks:");
 		if(settings.getDecks().size()+settings.getCastDecks().size() == 0) {
 			lore.add("No decks enabled");
@@ -120,7 +121,8 @@ public class Buttons {
 		ItemStack stack = new ItemStack(Material.WOOL,1,(short)1);
 		ItemMeta meta = stack.getItemMeta();
 		meta.setDisplayName("§eIdle Time");
-		meta.setLore(Arrays.asList("§e"+user.getGame().getSettings().getRoundTime()));
+		meta.setLore(Arrays.asList("§e"+user.getGame().getSettings().getRoundTime()+" Seconds",
+				"§eShift+Click to change","§e1 second at a time."));
 		stack.setItemMeta(meta);
 		return stack;
 	}

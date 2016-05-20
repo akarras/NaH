@@ -55,6 +55,24 @@ public class Nah extends JavaPlugin {
 			if(sender instanceof Player) {
 				User user = userManager.getUser((Player) sender);
 				user.updateGUI();
+				if(args.length > 0) {
+					if(args[0].equals("set")) {
+						if(!user.isHost()) {
+							sender.sendMessage("§cYou must be the host to run this command");
+							return true;
+						}
+						if(args.length < 3) {
+							sender.sendMessage("§aPlease use: /nah set password [password]");
+							return true;
+						}
+						if(args[1].equals("password")) {
+							user.getGame().getSettings().setGamePassword(args[1]);
+						}
+						sender.sendMessage("§aUnknown set argument");
+					} else if (args[0].equals("password")) {
+						user.setPassword(args[1]);
+					}
+				}
 				return true;
 			}else {
 				sender.sendMessage("§cThis command must be run from the console");

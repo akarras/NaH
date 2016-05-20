@@ -25,6 +25,7 @@ public class User {
 	private final int maxHand = 7;
 	private int score;
 	private MenuState state;
+	private String enteredPassword;
 	
 	public User(HumanEntity player) {
 		this.name = player.getName();
@@ -35,6 +36,9 @@ public class User {
 		message = ChatColor.translateAlternateColorCodes('&', message);
 		getPlayer().sendMessage(message);
 	}
+	
+	public String getPassword(){ return enteredPassword; }
+	public void setPassword(String pass){ enteredPassword = pass; }
 	
 	public boolean isHost() {
 		if(currentGame == name){

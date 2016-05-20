@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -82,6 +83,12 @@ public class Game implements Runnable {
 
 
 	public void joinGame(User player) {
+		if(StringUtils.isNotBlank(settings.getGamePassword())) {
+			if(!player.getPassword().equals(settings.getGamePassword())) {
+				player.sendMessage("§cYou do not have the right password to join this lobby");
+				player.sendMessage("§cUse /nah password [password]");
+			}
+		}
 		players.put(player.getName(),player);
 		player.setGame(gameName);
 		if(state.equals(GameState.PLAYERPICK)|state.equals(GameState.CZARPICK)) {

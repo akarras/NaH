@@ -53,6 +53,7 @@ public class Game implements Runnable {
 	
 	public void start(){
 		final GameSettings settings = getSettings();
+		//Game start prerequisite checks 
 		if(players.size() < GameSettings.MINIMUM_PLAYERS) {
 			sendMessage("§cFailed to start, not enough players");
 			return;
@@ -61,9 +62,11 @@ public class Game implements Runnable {
 			this.sendMessage("§cGame cannot start without a deck");
 			return;
 		}
+		//Reset our previous winners, white cards, black cards and what not.
 		this.previousWinners = new ArrayList<String>();
 		this.whiteCards = new WhiteCardStack();
 		this.blackCards = new BlackCardStack();
+		//Add the decks from the settings to the game
 		for(final String deckName:settings.getDecks()) {
 			JsonDeck jsonDeck = Nah.plugin.jsonDecks.getJsonDeck(deckName);
 			Set<BlackCard> blackCardSet = jsonDeck.getBlackCards();
@@ -72,6 +75,7 @@ public class Game implements Runnable {
 			this.blackCards.addCards(blackCardSet);
 		}
 		
+		this.timerTaskId = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Nah.plugin, this, 20, 20);
 		
 		for(User user:players.values()) {
 			user.gameStart();
@@ -83,10 +87,13 @@ public class Game implements Runnable {
 
 
 	public void joinGame(User player) {
+		//Check if the user needs a password
 		if(StringUtils.isNotBlank(settings.getGamePassword())) {
+			//Check if they have the right password or not
 			if(!player.getPassword().equals(settings.getGamePassword())) {
 				player.sendMessage("§cYou do not have the right password to join this lobby");
 				player.sendMessage("§cUse /nah password [password]");
+				return;
 			}
 		}
 		players.put(player.getName(),player);
@@ -234,13 +241,17 @@ public class Game implements Runnable {
 			this.updateRoundClock(this.settings.getRoundTime()*1000);
 			break;
 		case LOBBY:
+			//Cancel our game timer, as it starts back up when the round starts
+			if(timerTaskId > 0) {
+				Bukkit.getScheduler().cancelTask(timerTaskId);
+				timerTaskId = -1;
+			}
 			break;
 		case PLAYERPICK:
 			getNextCzar();
 			currentBlackCard = blackCards.drawCard();
 			playedCards = HashBiMap.create();
 			this.updateRoundClock(this.settings.getRoundTime()*1000);
-			this.timerTaskId = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Nah.plugin, this, 20, 20);
 			break;
 		default:
 			break;

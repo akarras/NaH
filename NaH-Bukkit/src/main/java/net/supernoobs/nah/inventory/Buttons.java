@@ -41,6 +41,16 @@ public class Buttons {
 		return stack;
 	}
 	
+	public static ItemStack SupportCaHButton(){
+		ItemStack stack = new ItemStack(Material.BEACON);
+		ItemMeta meta = stack.getItemMeta();
+		meta.setDisplayName("§bCards Against Humanity");
+		meta.setLore(Arrays.asList("§bThis plugin wouldn't exist", "§bwithout them go buy a deck!",
+				"§bhttp://cardsagainsthumanity.com"));
+		stack.setItemMeta(meta);
+		return stack;
+	}
+	
 	public static ItemStack JoinGameButton(Game game) {
 		ItemStack stack = new ItemStack(Material.SKULL_ITEM,1,(short)3);
 		SkullMeta meta = (SkullMeta) stack.getItemMeta();

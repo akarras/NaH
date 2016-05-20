@@ -48,6 +48,10 @@ public class InventoryListener implements Listener {
 					} else if(current.equals(Buttons.CreateNewGame())) {
 						Nah.plugin.gameManager.createGame(user);
 						return;
+					} else if(current.equals(Buttons.SupportCaHButton())) {
+						user.sendMessage("§bWebsite: http://cardsagainsthumanity.com");
+						event.getWhoClicked().closeInventory();
+						return;
 					}
 				}
 			} else if(inventoryName.equals(Inventories.nahPrefix+"§eBrowse Games")) {

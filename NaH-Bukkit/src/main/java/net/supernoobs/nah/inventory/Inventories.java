@@ -20,6 +20,7 @@ public class Inventories {
 		Inventory gameScreen = Bukkit.createInventory(user.getPlayer(), 27, nahPrefix+"§bNoobs Against Humanity");
 		gameScreen.addItem(Buttons.BrowseGames());
 		gameScreen.addItem(Buttons.CreateNewGame());
+		gameScreen.addItem(Buttons.SupportCaHButton());
 		return gameScreen;
 	}
 	public static Inventory gameSettings(User user) {

@@ -27,6 +27,10 @@ public class InventoryListener implements Listener {
 	public void inventoryClick(InventoryClickEvent event){
 		String inventoryName = event.getInventory().getName();
 		if(inventoryName != null) {
+			if(!event.getSlotType().equals(SlotType.CONTAINER)){
+				return;
+			}
+			
 			if(inventoryName.equals(Inventories.nahPrefix+"§aPick a Card")) {
 				event.setCancelled(true);
 				int clickedCard = event.getSlot()-19;

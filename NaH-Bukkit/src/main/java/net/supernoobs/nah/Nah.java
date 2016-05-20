@@ -29,12 +29,12 @@ public class Nah extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		plugin = this;
+		settings = new Settings();
 		
 		gameManager = new GameManager();
 		userManager = new UserManager();
 		
 		nahLogger = new Logger();
-		settings = new Settings();
 		
 		jsonDecks = new JsonDeckProvider();
 		

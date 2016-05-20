@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import net.supernoobs.nah.Nah;
+import net.supernoobs.nah.Logger.LogLevel;
+import net.supernoobs.nah.data.CardCastDeck;
 
 public class GameSettings {
 	public static final int MINIMUM_PLAYERS = 2;
@@ -14,15 +16,25 @@ public class GameSettings {
 	private int roundTime;
 	public final int roundWarningTime = 3000;
 	private int currentDeckPage;
+	private Set<CardCastDeck> cardCastDecks;
 	
 	public GameSettings(){
 		enabledDecks = new HashSet<String>();
+		cardCastDecks = new HashSet<CardCastDeck>();
 		setScoreLimit(8);
 		enabledDecks.add("Base Set");
 		setRoundTime(60);
 	}
 	public Set<String> getDecks() {
 		return enabledDecks;
+	}
+	
+	public Set<CardCastDeck> getCastDecks() {
+		return cardCastDecks;
+	}
+	
+	public Set<CardCastDeck> cardCastDecks() {
+		return cardCastDecks;
 	}
 	
 	public boolean isDeckEnabled(String deck){
@@ -69,5 +81,14 @@ public class GameSettings {
 	}
 	public void setCurrentDeckPage(int currentDeckPage) {
 		this.currentDeckPage = currentDeckPage;
+	}
+	
+	public void addCardCast(String cardCastCode) {
+		CardCastDeck deck = Nah.plugin.cardCast.DownloadDeck(cardCastCode);
+		cardCastDecks.add(deck);
+		Nah.plugin.nahLogger.Log(LogLevel.NORMAL, "Added cardcast deck "
+			+deck.getName()+" "+deck.getDescription()+" "
+			+deck.getBlackCards().size()+" black cards "
+			+deck.getWhiteCards().size()+" white cards");
 	}
 }

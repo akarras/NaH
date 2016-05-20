@@ -6,12 +6,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import net.supernoobs.nah.data.CardCastService;
 import net.supernoobs.nah.data.JsonDeckProvider;
-import net.supernoobs.nah.game.Game;
 import net.supernoobs.nah.game.GameManager;
 import net.supernoobs.nah.game.User;
 import net.supernoobs.nah.game.UserManager;
-import net.supernoobs.nah.game.cards.WhiteCard;
 import net.supernoobs.nah.listeners.InventoryListener;
 
 public class Nah extends JavaPlugin {
@@ -21,6 +20,7 @@ public class Nah extends JavaPlugin {
 	public UserManager userManager;
 	
 	public JsonDeckProvider jsonDecks;
+	public CardCastService cardCast;
 	
 	public Logger nahLogger;
 	public Settings settings;
@@ -37,6 +37,7 @@ public class Nah extends JavaPlugin {
 		nahLogger = new Logger();
 		
 		jsonDecks = new JsonDeckProvider();
+		cardCast = new CardCastService();
 		
 		plugin.getServer().getPluginManager().registerEvents(new InventoryListener(), this);
 		
@@ -67,12 +68,19 @@ public class Nah extends JavaPlugin {
 						}
 						if(args[1].equals("password")) {
 							user.getGame().getSettings().setGamePassword(args[1]);
+							return true;
 						}
 						sender.sendMessage("§aUnknown set argument");
 					} else if (args[0].equals("password")) {
 						user.setPassword(args[1]);
+						return true;
+					} else if (args[0].equals("cardcast")) {
+						if(user.isHost()) {
+							user.getGame().getSettings().addCardCast(args[1]);
+						}
 					}
 				}
+				
 				return true;
 			}else {
 				sender.sendMessage("§cThis command must be run from the console");

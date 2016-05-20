@@ -14,6 +14,7 @@ import com.google.common.collect.HashBiMap;
 
 import net.md_5.bungee.api.ChatColor;
 import net.supernoobs.nah.Nah;
+import net.supernoobs.nah.data.CardCastDeck;
 import net.supernoobs.nah.data.JsonDeck;
 import net.supernoobs.nah.game.cards.BlackCard;
 import net.supernoobs.nah.game.cards.BlackCardStack;
@@ -58,7 +59,7 @@ public class Game implements Runnable {
 			sendMessage("§cFailed to start, not enough players");
 			return;
 		}
-		if(settings.getDecks().size() == 0) {
+		if(settings.getDecks().size()+settings.getCastDecks().size() == 0) {
 			this.sendMessage("§cGame cannot start without a deck");
 			return;
 		}
@@ -67,6 +68,10 @@ public class Game implements Runnable {
 		this.whiteCards = new WhiteCardStack();
 		this.blackCards = new BlackCardStack();
 		//Add the decks from the settings to the game
+		for(CardCastDeck deck:settings.getCastDecks()) {
+			this.whiteCards.addCards(deck.getWhiteCards());
+			this.blackCards.addCards(deck.getBlackCards());
+		}
 		for(final String deckName:settings.getDecks()) {
 			JsonDeck jsonDeck = Nah.plugin.jsonDecks.getJsonDeck(deckName);
 			Set<BlackCard> blackCardSet = jsonDeck.getBlackCards();

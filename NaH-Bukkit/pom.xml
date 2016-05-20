@@ -84,8 +84,8 @@
             <configuration>
              <relocations>
                <relocation>
-                 <pattern>org.jsoup.parser</pattern>
-                 <shadedPattern>supernoobs.net.shaded.org.jsoup.parser</shadedPattern>
+                 <pattern>org.jsoup</pattern>
+                 <shadedPattern>supernoobs.net.shaded.org.jsoup</shadedPattern>
                </relocation>
              </relocations>
              <minimizeJar>true</minimizeJar>
@@ -93,7 +93,7 @@
                 <filter>
                   <artifact>org.jsoup:jsoup</artifact>
                   <includes>
-                  	<include>org/jsoup/parser/**</include>
+                  	<include>org/jsoup/**</include>
                   </includes>
                 </filter>
               </filters>

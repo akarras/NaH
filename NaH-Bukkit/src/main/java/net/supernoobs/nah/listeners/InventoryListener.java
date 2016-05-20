@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import net.supernoobs.nah.Nah;
@@ -91,6 +92,21 @@ public class InventoryListener implements Listener {
 						if(user.isHost()) {
 							user.getGame().start();
 							return;
+						}
+					}
+					if(user.isHost()) {
+						if(item.hasItemMeta()) {
+							ItemMeta meta = item.getItemMeta();
+							if(meta.hasDisplayName()) {
+								String playerName = meta.getDisplayName();
+								playerName = ChatColor.stripColor(playerName);
+								//We don't want to kick the player if the player is the player clicking
+								if(playerName.equals(user.getName()))
+									return;
+								
+								User kickUser = Nah.plugin.userManager.getUser(playerName);
+								user.getGame().quitGame(kickUser);
+							}
 						}
 					}
 				}

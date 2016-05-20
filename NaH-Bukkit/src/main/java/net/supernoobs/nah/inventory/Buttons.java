@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import net.md_5.bungee.api.ChatColor;
+import net.supernoobs.nah.data.CardCastDeck;
 import net.supernoobs.nah.data.JsonDeck;
 import net.supernoobs.nah.game.Game;
 import net.supernoobs.nah.game.GameSettings;
@@ -96,11 +97,14 @@ public class Buttons {
 		List<String> lore = new ArrayList<String>();
 		lore.add("Score Limit: "+settings.getScoreLimit());
 		lore.add("Enabled Decks:");
-		if(settings.getDecks().size() == 0) {
+		if(settings.getDecks().size()+settings.getCastDecks().size() == 0) {
 			lore.add("No decks enabled");
 		}
 		for(String deck:settings.getDecks()){
 			lore.add(deck);
+		}
+		for(CardCastDeck deck:settings.getCastDecks()) {
+			lore.add(deck.getName());
 		}
 		meta.setLore(lore);
 		stack.setItemMeta(meta);

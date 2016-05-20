@@ -126,9 +126,7 @@ public class Inventories {
 		gameBoard.setItem(4, Players.roundWinner(gameWinner));
 		int curSlot = 9;
 		for(WinningPair winningPlay:gameWinner.getWinningPlays()) {
-			//This will break with a score limit over 9, should look for alternatives.
-			gameBoard.setItem(curSlot+9, Cards.whiteCard(winningPlay.getWhiteCards()));
-			gameBoard.setItem(curSlot, Cards.blackCard(winningPlay.getBlack()));
+			gameBoard.setItem(curSlot, Cards.comboCard(winningPlay));
 			curSlot++;
 		}
 		return gameBoard;

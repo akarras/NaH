@@ -35,6 +35,11 @@
   </repositories>
   <dependencies>
     <dependency>
+     <groupId>org.jsoup</groupId>
+     <artifactId>jsoup</artifactId>
+     <version>1.9.2</version>
+    </dependency>
+    <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
       <version>1.9.2-R0.1-SNAPSHOT</version>
@@ -66,6 +71,36 @@
       </resource>
     </resources>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.3</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+             <relocations>
+               <relocation>
+                 <pattern>org.jsoup.parser</pattern>
+                 <shadedPattern>supernoobs.net.shaded.org.jsoup.parser</shadedPattern>
+               </relocation>
+             </relocations>
+             <minimizeJar>true</minimizeJar>
+              <filters>
+                <filter>
+                  <artifact>org.jsoup:jsoup</artifact>
+                  <includes>
+                  	<include>org/jsoup/parser/**</include>
+                  </includes>
+                </filter>
+              </filters>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>

@@ -3,10 +3,7 @@ package net.supernoobs.nah.inventory;
 import java.util.List;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-
 import com.google.common.collect.BiMap;
 
 import net.supernoobs.nah.Nah;
@@ -16,7 +13,7 @@ import net.supernoobs.nah.game.User;
 import net.supernoobs.nah.game.cards.WhiteCard;
 
 public class Inventories {
-	public static String nahPrefix = "§b[Nah] ";
+	public static final String nahPrefix = "§b[NaH] ";
 	public static Inventory mainMenu(User user) {
 		Inventory gameScreen = Bukkit.createInventory(user.getPlayer(), 27, nahPrefix+"§bNoobs Against Humanity");
 		gameScreen.addItem(Buttons.BrowseGames());

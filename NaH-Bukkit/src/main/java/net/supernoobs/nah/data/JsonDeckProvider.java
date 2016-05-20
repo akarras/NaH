@@ -21,7 +21,10 @@ public class JsonDeckProvider {
 	public File jsonFolder = new File(Nah.plugin.getDataFolder()+File.separator+"packs");
 	LinkedHashMap<String,JsonDeck> decks;
 	public JsonDeckProvider(){
-		Nah.plugin.saveResource("packs/all.json", false);
+		File allFile = new File(jsonFolder+File.separator+"all.json");
+		if(!allFile.exists()) {
+			Nah.plugin.saveResource("packs/all.json", false);
+		}
 		decks = new LinkedHashMap<String,JsonDeck>();
 		JsonParser parser = new JsonParser();
 		JsonObject obj = new JsonObject();

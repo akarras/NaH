@@ -8,7 +8,6 @@ import java.util.TreeMap;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 
 import net.supernoobs.nah.Nah;
@@ -189,10 +188,10 @@ public class User {
 		wonCards.put(blackCardWon, winningHand);
 	}
 	
-	public List<WhiteCard> getLastWinningPlay() {
+	public Entry<BlackCard, List<WhiteCard>> getLastWinningPlay() {
 		if(this.wonCards.size() == 0)
 			return null;
-		return this.wonCards.lastEntry().getValue();
+		return this.wonCards.lastEntry();
 	}
 	
 	public Set<Entry<BlackCard, List<WhiteCard>>> getWinningPlays() {

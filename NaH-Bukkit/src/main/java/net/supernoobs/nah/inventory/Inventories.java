@@ -114,8 +114,8 @@ public class Inventories {
 		Inventory gameBoard = Bukkit.createInventory(user.getPlayer(), 27, nahPrefix+"§a"+user.getGame().getLastWinner().getName()+" Won!");
 		User lastWinner = user.getGame().getLastWinner();
 		gameBoard.setItem(12, Players.roundWinner(lastWinner));
-		gameBoard.setItem(14, Cards.whiteCard(user.getLastWinningPlay()));
-		//TODO Show won cards gameBoard.setItem(index, item);
+		gameBoard.setItem(13, Cards.blackCard(user.getLastWinningPlay().getKey()));
+		gameBoard.setItem(14, Cards.whiteCard(user.getLastWinningPlay().getValue()));
 		return gameBoard;
 	}
 	

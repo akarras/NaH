@@ -1,5 +1,7 @@
 package net.supernoobs.nah.game.cards;
 
+import org.jsoup.Jsoup;
+
 public class WhiteCard implements ICard {
 	private final String text;
 	public WhiteCard(String cardText) {
@@ -7,6 +9,6 @@ public class WhiteCard implements ICard {
 	}
 	
 	public String getText() {
-		return text;
+		return Jsoup.parse(text).text();
 	}
 }

@@ -1,5 +1,7 @@
 package net.supernoobs.nah.game.cards;
 
+import org.jsoup.Jsoup;
+
 public class BlackCard implements ICard {
 	private String text;
 	private int pick;
@@ -15,6 +17,6 @@ public class BlackCard implements ICard {
 
 	@Override
 	public String getText() {
-		return text;
+		return Jsoup.parse(text).text();
 	}
 }

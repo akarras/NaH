@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.jsoup.Jsoup;
+
 import net.supernoobs.nah.game.cards.BlackCard;
 import net.supernoobs.nah.game.cards.CardDeck;
 import net.supernoobs.nah.game.cards.WhiteCard;
@@ -61,7 +63,7 @@ public class JsonDeck extends CardDeck {
 
 	@Override
 	public String getName() {
-		return name;
+		return Jsoup.parse(name).text();
 	}
 
 	@Override

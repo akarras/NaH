@@ -1,5 +1,6 @@
 package net.supernoobs.nah;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -21,12 +22,19 @@ public class Nah extends JavaPlugin {
 	
 	public JsonDeckProvider jsonDecks;
 	
+	public Logger logger;
+	public Settings settings;
+	
+	
 	@Override
 	public void onEnable() {
 		plugin = this;
 		
 		gameManager = new GameManager();
 		userManager = new UserManager();
+		
+		logger = new Logger();
+		settings = new Settings();
 		
 		jsonDecks = new JsonDeckProvider();
 		
@@ -38,6 +46,7 @@ public class Nah extends JavaPlugin {
 	public void onDisable() {
 		//Close player inventories
 		userManager.closeMenus();
+		Bukkit.getServer().getScheduler().cancelTasks(this);
 	}
 	
 	@Override

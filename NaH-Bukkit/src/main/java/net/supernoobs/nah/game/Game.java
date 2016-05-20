@@ -89,6 +89,11 @@ public class Game implements Runnable {
 	public void joinGame(User player) {
 		//Check if the user needs a password
 		if(StringUtils.isNotBlank(settings.getGamePassword())) {
+			if(StringUtils.isBlank(player.getPassword())) {
+				player.sendMessage("§cYou need to specify a password to join this lobby");
+				player.sendMessage("§cUse /nah password [password]");
+				return;
+			}
 			//Check if they have the right password or not
 			if(!player.getPassword().equals(settings.getGamePassword())) {
 				player.sendMessage("§cYou do not have the right password to join this lobby");
@@ -120,7 +125,8 @@ public class Game implements Runnable {
 		player.setGame(null);
 		player.setMenuState(User.MenuState.MainMenu);
 		player.updateGUI();
-		checkPlayedCards();
+		if(this.state != GameState.LOBBY)
+			checkPlayedCards();
 		updatePlayerGUIs();
 	}
 

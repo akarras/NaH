@@ -85,7 +85,7 @@ public class Nah extends JavaPlugin {
 				
 				return true;
 			}else {
-				sender.sendMessage("§cThis command must be run from the console");
+				sender.sendMessage("§cThis command cannot be run from the console.");
 			}
 		}
 		

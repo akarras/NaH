@@ -24,12 +24,14 @@ public class Inventories {
 	}
 	public static Inventory gameSettings(User user) {
 		Inventory gameSettings = Bukkit.createInventory(user.getPlayer(), 27, nahPrefix+"§eGame Settings");
-		gameSettings.setItem(0, Buttons.increaseScoreLimitButton());
 		gameSettings.setItem(9, Buttons.currentScoreButton(user));
-		gameSettings.setItem(18, Buttons.decreaseScoreLimitButton());
-		gameSettings.setItem(1, Buttons.increaseRoundTimeButton());
 		gameSettings.setItem(10, Buttons.currentRoundTimeButton(user));
-		gameSettings.setItem(19, Buttons.decreaseRoundTimeButton());
+		if(user.isHost()) {
+			gameSettings.setItem(0, Buttons.increaseScoreLimitButton());
+			gameSettings.setItem(18, Buttons.decreaseScoreLimitButton());
+			gameSettings.setItem(1, Buttons.increaseRoundTimeButton());
+			gameSettings.setItem(19, Buttons.decreaseRoundTimeButton());
+		}
 		gameSettings.setItem(15, Buttons.backToLobbyButton());
 		gameSettings.setItem(13, Buttons.deckSettingsButton(user));
 		return gameSettings;

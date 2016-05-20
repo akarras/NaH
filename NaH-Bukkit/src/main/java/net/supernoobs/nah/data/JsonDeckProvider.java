@@ -2,7 +2,6 @@ package net.supernoobs.nah.data;
 
 import java.io.File;
 import java.io.FileReader;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Set;

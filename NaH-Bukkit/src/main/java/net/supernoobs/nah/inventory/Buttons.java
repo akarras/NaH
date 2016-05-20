@@ -172,6 +172,7 @@ public class Buttons {
 		meta.setDisplayName("§6Deck Settings");
 		final GameSettings settings = user.getGame().getSettings();
 		lore.add(settings.getDecks().size()+ " Decks Enabled");
+		meta.setLore(lore);
 		stack.setItemMeta(meta);
 		return stack;
 	}

@@ -8,8 +8,6 @@ import net.supernoobs.nah.Logger.LogLevel;
 import net.supernoobs.nah.data.CardCastDeck;
 
 public class GameSettings {
-	public static final int MINIMUM_PLAYERS = 3;
-	public static final int MAXIMUM_PLAYERS = 7;
 	private Set<String> enabledDecks;
 	private int scoreLimit;
 	private String gamePassword;

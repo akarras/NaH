@@ -16,6 +16,9 @@ public class Settings {
 	private int defaultIdleTime;
 	private int minimumIdleTime;
 	
+	private int minimumPlayerCount;
+	private int maximumPlayerCount;
+	
 	public Settings() {
 		//Check if the file exists or not
 		//If not, we should save it from our resources
@@ -33,6 +36,9 @@ public class Settings {
 		maxIdleTime = idleTime.getInt("maximum");
 		defaultIdleTime = idleTime.getInt("default");
 		minimumIdleTime = idleTime.getInt("minimum");
+		
+		maximumPlayerCount = config.getInt("settings.player-count.maximum");
+		minimumPlayerCount = config.getInt("settings.player-count.minimum");
 	}
 	public int getLoggingLevel(){ return loggingLevel; }
 	public int getMaxScoreLimit(){ return maximumScoreLimit; }
@@ -41,4 +47,7 @@ public class Settings {
 	public int getMaxIdleTime() { return maxIdleTime; }
 	public int getDefaultIdleTime() { return defaultIdleTime; }
 	public int getMinimumIdleTime() { return minimumIdleTime; }
+	
+	public int getMinumumPlayers() { return minimumPlayerCount; }
+	public int getMaximumPlayers() { return maximumPlayerCount; }
 }

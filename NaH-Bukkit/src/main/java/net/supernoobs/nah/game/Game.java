@@ -55,7 +55,7 @@ public class Game implements Runnable {
 	public void start(){
 		final GameSettings settings = getSettings();
 		//Game start prerequisite checks 
-		if(players.size() < GameSettings.MINIMUM_PLAYERS) {
+		if(players.size() < Nah.plugin.settings.getMaximumPlayers()) {
 			sendMessage("§cFailed to start, not enough players");
 			return;
 		}
@@ -92,6 +92,10 @@ public class Game implements Runnable {
 
 
 	public void joinGame(User player) {
+		if(players.size() >= Nah.plugin.settings.getMaximumPlayers()) {
+			player.sendMessage("§cGame Full");
+			return;
+		}
 		//Check if the user needs a password
 		if(StringUtils.isNotBlank(settings.getGamePassword())) {
 			if(StringUtils.isBlank(player.getPassword())) {

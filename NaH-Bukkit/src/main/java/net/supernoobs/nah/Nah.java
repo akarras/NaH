@@ -67,7 +67,7 @@ public class Nah extends JavaPlugin {
 							return true;
 						}
 						if(args[1].equals("password")) {
-							user.getGame().getSettings().setGamePassword(args[1]);
+							user.getGame().getSettings().setGamePassword(args[2]);
 							return true;
 						}
 						sender.sendMessage("§aUnknown set argument");
@@ -77,6 +77,7 @@ public class Nah extends JavaPlugin {
 					} else if (args[0].equals("cardcast")) {
 						if(user.isHost()) {
 							user.getGame().getSettings().addCardCast(args[1]);
+							user.getGame().updatePlayerGUIs();
 						}
 					}
 				}

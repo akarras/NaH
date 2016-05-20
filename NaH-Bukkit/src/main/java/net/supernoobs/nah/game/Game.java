@@ -211,6 +211,7 @@ public class Game implements Runnable {
 		}
 		//If all players have played, then change the gamestate to allow the czar to pick
 		this.state = GameState.CZARPICK;
+		gameStateChanged();
 		this.updatePlayerGUIs();
 	}
 	

@@ -1,11 +1,15 @@
 package net.supernoobs.nah.inventory;
 
 import java.util.List;
+import java.util.Set;
+
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
 import com.google.common.collect.BiMap;
 
 import net.supernoobs.nah.Nah;
+import net.supernoobs.nah.data.CardCastDeck;
 import net.supernoobs.nah.data.JsonDeck;
 import net.supernoobs.nah.game.Game;
 import net.supernoobs.nah.game.GameSettings;
@@ -33,6 +37,7 @@ public class Inventories {
 			gameSettings.setItem(19, Buttons.decreaseRoundTimeButton());
 		}
 		gameSettings.setItem(15, Buttons.backToLobbyButton());
+		gameSettings.setItem(14, Buttons.cardCastMenuButton(user));
 		gameSettings.setItem(13, Buttons.deckSettingsButton(user));
 		return gameSettings;
 	}
@@ -64,6 +69,18 @@ public class Inventories {
 		gameDeckSettings.setItem(gameDeckSettings.getSize()-2,Buttons.SettingsMenuButton(user));
 		return gameDeckSettings;
 	}
+	
+	public static Inventory cardCastDeckSettings(User user){
+		Inventory castInventory = Bukkit.createInventory(user.getPlayer(), 27, nahPrefix+ChatColor.DARK_AQUA+"Card Cast Decks");
+		Set<CardCastDeck> decks =user.getGame().getSettings().getCastDecks();
+		for(CardCastDeck deck:decks) {
+			castInventory.addItem(Buttons.removeCardCastDeckButton(deck, user));
+		}
+		castInventory.setItem(castInventory.getSize()-2, Buttons.SettingsMenuButton(user));
+		castInventory.setItem(castInventory.getSize()-1, Buttons.backToLobbyButton());
+		return castInventory;
+	}
+	
 	public static Inventory BrowseGames(User user) {
 		Inventory games = Bukkit.createInventory(user.getPlayer(), 27, nahPrefix+"§eBrowse Games");
 		for(Game game:Nah.plugin.gameManager.getGames().values()) {

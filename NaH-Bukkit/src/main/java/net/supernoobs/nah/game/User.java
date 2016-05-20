@@ -100,6 +100,9 @@ public class User {
 			case DeckSettings:
 				getPlayer().openInventory(Inventories.gameDeckSettings(this));
 				break;
+			case CardCastSettings:
+				getPlayer().openInventory(Inventories.cardCastDeckSettings(this));
+				break;
 			default:
 				state = MenuState.Game;
 				break;
@@ -167,6 +170,7 @@ public class User {
 		BrowseGames,
 		Settings,
 		DeckSettings,
+		CardCastSettings,
 		Game
 	}
 	

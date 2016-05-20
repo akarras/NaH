@@ -198,6 +198,29 @@ public class Buttons {
 		return stack;
 	}
 	
+	public static ItemStack removeCardCastDeckButton(CardCastDeck deck, User user) {
+		ItemStack stack = new ItemStack(Material.WOOL,1,(short)5);
+		ItemMeta meta = stack.getItemMeta();
+		meta.setDisplayName("§a"+deck.getName());
+		ArrayList<String> lore = new ArrayList<String>();
+		lore.add("§cClick to remove");
+		lore.addAll(multiLine(deck.getDescription(),20,ChatColor.RED));
+		meta.setLore(lore);
+		stack.setItemMeta(meta);
+		return stack;
+	}
+	
+	public static ItemStack cardCastMenuButton(User user) {
+		ItemStack stack = new ItemStack(Material.WOOL,1,(short)7);
+		ItemMeta meta = stack.getItemMeta();
+		meta.setDisplayName("§3Edit CardCast");
+		meta.setLore(Arrays.asList("§aAdd CardCast Decks with",
+				"§a/nah cardcast <id>",
+				"§aGet the id from cardcastgame.com"));
+		stack.setItemMeta(meta);
+		return stack;
+	}
+	
 	public static ItemStack nextPageButton() {
 		ItemStack stack = new ItemStack(Material.ARROW);
 		ItemMeta meta = stack.getItemMeta();

@@ -14,6 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import net.supernoobs.nah.Nah;
+import net.supernoobs.nah.data.CardCastDeck;
 import net.supernoobs.nah.game.Game;
 import net.supernoobs.nah.game.GameSettings;
 import net.supernoobs.nah.game.User;
@@ -58,7 +59,28 @@ public class InventoryListener implements Listener {
 						return;
 					}
 				}
-			} else if(inventoryName.equals(Inventories.nahPrefix+"§eBrowse Games")) {
+			} else if(inventoryName.equals(Inventories.nahPrefix+ChatColor.DARK_AQUA+"Card Cast Decks")) {
+				event.setCancelled(true);
+				ItemStack clickedItem = event.getCurrentItem();
+				User user = Nah.plugin.userManager.getUser(event.getWhoClicked());
+				if(clickedItem.equals(Buttons.backToLobbyButton())){
+					user.setMenuState(MenuState.Game);
+					user.updateGUI();
+					return;
+				} else if(clickedItem.equals(Buttons.SettingsMenuButton(user))) {
+					user.setMenuState(MenuState.Settings);
+					user.updateGUI();
+					return;
+				} else if (user.isHost()){
+					for(CardCastDeck deck:user.getGame().getSettings().getCastDecks()) {
+						if(clickedItem.equals(Buttons.removeCardCastDeckButton(deck, user))){
+							user.getGame().getSettings().getCastDecks().remove(deck);
+							user.getGame().updatePlayerGUIs();
+						}
+					}
+				}
+			}
+			else if(inventoryName.equals(Inventories.nahPrefix+"§eBrowse Games")) {
 				if(event.getSlotType() == SlotType.CONTAINER) {
 					event.setCancelled(true);
 					User user = Nah.plugin.userManager.getUser(event.getWhoClicked());
@@ -156,6 +178,10 @@ public class InventoryListener implements Listener {
 					} else {
 						settings.setRoundTime(settings.getRoundTime() - 1);
 					}
+					user.updateGUI();
+					return;
+				} else if(event.getCurrentItem().equals(Buttons.cardCastMenuButton(user))){
+					user.setMenuState(MenuState.CardCastSettings);
 					user.updateGUI();
 					return;
 				} else if(event.getCurrentItem().equals(Buttons.increaseRoundTimeButton())) {

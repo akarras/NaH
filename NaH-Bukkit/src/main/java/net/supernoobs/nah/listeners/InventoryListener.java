@@ -227,8 +227,4 @@ public class InventoryListener implements Listener {
 			user.playerClosedInventory();
 		}
 	}
-	@EventHandler
-	public void onInventoryOpen(InventoryOpenEvent event) {
-		
-	}
 }

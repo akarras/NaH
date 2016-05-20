@@ -74,12 +74,11 @@ public class User {
 				} else {
 					return;
 				}
-			} else {
-				inventoryClosed = false;
 			}
 		}
 		//Signal that the inventory is being updated
 		inventoryUpdating = true;
+		inventoryClosed = false;
 		if(!isInGame()) {
 			switch(state) {
 			case BrowseGames:

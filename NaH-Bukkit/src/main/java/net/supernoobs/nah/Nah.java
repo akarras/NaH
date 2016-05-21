@@ -12,6 +12,7 @@ import net.supernoobs.nah.game.GameManager;
 import net.supernoobs.nah.game.User;
 import net.supernoobs.nah.game.UserManager;
 import net.supernoobs.nah.listeners.InventoryListener;
+import net.supernoobs.nah.listeners.JoinListener;
 
 public class Nah extends JavaPlugin {
 	public static Nah plugin;
@@ -40,6 +41,7 @@ public class Nah extends JavaPlugin {
 		cardCast = new CardCastService();
 		
 		plugin.getServer().getPluginManager().registerEvents(new InventoryListener(), this);
+		plugin.getServer().getPluginManager().registerEvents(new JoinListener(), this);
 		
 	}
 	

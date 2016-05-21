@@ -27,6 +27,14 @@ public class UserManager {
 		return getUser(username);
 	}
 	
+	public void removeUser(String username) {
+		User user = users.get(username);
+		if(user.isInGame()) {
+			user.getGame().quitGame(user);
+		}
+		users.remove(username);
+	}
+	
 	public void closeMenus() {
 		for(User user:users.values()){
 			user.getPlayer().closeInventory();

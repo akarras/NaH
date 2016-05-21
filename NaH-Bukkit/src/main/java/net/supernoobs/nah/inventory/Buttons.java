@@ -221,6 +221,26 @@ public class Buttons {
 		return stack;
 	}
 	
+	public static ItemStack PasswordInfoButton(User user) {
+		ItemStack stack = new ItemStack(Material.WOOL, 1,(short)6);
+		ItemMeta meta = stack.getItemMeta();
+		meta.setDisplayName("§eGame Password");
+		List<String> lore = new ArrayList<String>();
+		GameSettings settings = user.getGame().getSettings();
+		if(StringUtils.isBlank(settings.getGamePassword())){
+			lore.add("§7Use the command");
+			lore.add("§7/nah set password [password]");
+			lore.add("§7To add a password");
+		} else {
+			lore.add("§7Password: "+settings.getGamePassword());
+			lore.add("§7Use /nah password clear");
+			lore.add("§7To remove it");
+		}
+		meta.setLore(lore);
+		stack.setItemMeta(meta);
+		return stack;
+	}
+	
 	public static ItemStack nextPageButton() {
 		ItemStack stack = new ItemStack(Material.ARROW);
 		ItemMeta meta = stack.getItemMeta();

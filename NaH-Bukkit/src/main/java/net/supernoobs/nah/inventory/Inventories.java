@@ -35,10 +35,11 @@ public class Inventories {
 			gameSettings.setItem(18, Buttons.decreaseScoreLimitButton());
 			gameSettings.setItem(1, Buttons.increaseRoundTimeButton());
 			gameSettings.setItem(19, Buttons.decreaseRoundTimeButton());
+			gameSettings.setItem(25, Buttons.PasswordInfoButton(user));
 		}
-		gameSettings.setItem(15, Buttons.backToLobbyButton());
-		gameSettings.setItem(14, Buttons.cardCastMenuButton(user));
-		gameSettings.setItem(13, Buttons.deckSettingsButton(user));
+		gameSettings.setItem(17, Buttons.backToLobbyButton());
+		gameSettings.setItem(16, Buttons.cardCastMenuButton(user));
+		gameSettings.setItem(15, Buttons.deckSettingsButton(user));
 		return gameSettings;
 	}
 	public static Inventory gameDeckSettings(User user) {

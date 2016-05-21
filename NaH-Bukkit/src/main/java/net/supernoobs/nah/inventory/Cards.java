@@ -50,11 +50,11 @@ public class Cards {
 		return stack;
 	}
 	
-	public static ItemStack comboCard(User.WinningPair pair) {
+	public static ItemStack comboCard(User.WinningPair pair, String name) {
 		ItemStack stack = new ItemStack(Material.GOLD_INGOT);
 		ItemMeta meta = stack.getItemMeta();
 		//Insert our white card directly into the black, onto the blank spaces
-		meta.setDisplayName(ChatColor.WHITE+"Combo"+ChatColor.GRAY+"Card");
+		meta.setDisplayName(name);
 		String blackText = pair.getBlack().getText();
 		for(int current = 0; current<pair.getBlack().getPick(); current++) {
 			String whiteCardText = ChatColor.WHITE+pair.getWhiteCards().get(current).getText();

@@ -133,7 +133,7 @@ public class Inventories {
 		Inventory gameBoard = Bukkit.createInventory(user.getPlayer(), 27, nahPrefix+"§a"+user.getGame().getLastWinner().getName()+" Won!");
 		User lastWinner = user.getGame().getLastWinner();
 		gameBoard.setItem(12, Players.roundWinner(lastWinner));
-		gameBoard.setItem(13, Cards.comboCard(lastWinner.getLastWinningPlay()));
+		gameBoard.setItem(13, Cards.comboCard(lastWinner.getLastWinningPlay(),ChatColor.GOLD+"Winning Play"));
 		//gameBoard.setItem(14, Cards.whiteCard(lastWinner.getLastWinningPlay().getWhiteCards()));
 		return gameBoard;
 	}
@@ -144,7 +144,7 @@ public class Inventories {
 		gameBoard.setItem(4, Players.roundWinner(gameWinner));
 		int curSlot = 9;
 		for(WinningPair winningPlay:gameWinner.getWinningPlays()) {
-			gameBoard.setItem(curSlot, Cards.comboCard(winningPlay));
+			gameBoard.setItem(curSlot, Cards.comboCard(winningPlay,ChatColor.GOLD+"Winning Play"));
 			curSlot++;
 		}
 		return gameBoard;

@@ -10,3 +10,5 @@ commands:
 permissions:
   nah.play:
     default: true
+  nah.cardcast:
+    default: true

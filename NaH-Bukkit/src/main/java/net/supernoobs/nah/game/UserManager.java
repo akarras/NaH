@@ -28,11 +28,13 @@ public class UserManager {
 	}
 	
 	public void removeUser(String username) {
-		User user = users.get(username);
-		if(user.isInGame()) {
-			user.getGame().quitGame(user);
+		if(users.containsKey(username)) {
+			User user = users.get(username);
+			if(user.isInGame()) {
+				user.getGame().quitGame(user);
+			}
+			users.remove(username);
 		}
-		users.remove(username);
 	}
 	
 	public void closeMenus() {

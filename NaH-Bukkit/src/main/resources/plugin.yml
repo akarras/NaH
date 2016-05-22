@@ -4,7 +4,7 @@ version: ${version}
 author: [colorfulchew]
 commands:
   nah:
-    description: Uses a warp
+    description: Opens the game menu
     permission: nah.play
     usage: /nah
 permissions:
@@ -12,3 +12,5 @@ permissions:
     default: true
   nah.cardcast:
     default: true
+  nah.reload:
+    default: op

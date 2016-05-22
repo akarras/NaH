@@ -10,6 +10,7 @@ public class CardCastCommand extends SubCommand {
 
 	public CardCastCommand() {
 		super("cardcast", new String[]{"cc"}, 1);
+		permissionRequired = true;
 	}
 
 	@Override
@@ -19,10 +20,6 @@ public class CardCastCommand extends SubCommand {
 
 	@Override
 	public boolean execute(CommandSender sender, String[] args) {
-		if(!hasPermission(sender)) {
-			sender.sendMessage("§cYou do not have permission to use this command");
-			return true;
-		}
 		if(args.length < 2) {
 			return true;
 		}

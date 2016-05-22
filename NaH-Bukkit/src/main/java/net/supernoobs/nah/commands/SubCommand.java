@@ -6,11 +6,13 @@ public abstract class SubCommand {
 	private String commandName;
 	private String[] triggerAliases;
 	private int triggerLength;
+	protected boolean permissionRequired;
 	
 	public SubCommand(String command, String[] triggerAliases, int triggerLength) {
 		this.commandName = command;
 		this.triggerAliases = triggerAliases;
 		this.triggerLength = triggerLength;
+		this.permissionRequired = false;
 	}
 	
 	public boolean isTriggered(String[] args) {
@@ -29,6 +31,10 @@ public abstract class SubCommand {
 			}
 		}
 		return false;
+	}
+	
+	public boolean permissionRequired() {
+		return permissionRequired;
 	}
 	
 	public String permission(){

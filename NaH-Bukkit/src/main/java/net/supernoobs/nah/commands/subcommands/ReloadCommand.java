@@ -15,7 +15,7 @@ public class ReloadCommand extends SubCommand {
 
 	public ReloadCommand() {
 		super("reload", new String[]{"r"}, 1);
-		// TODO Auto-generated constructor stub
+		permissionRequired = true;
 	}
 
 	@Override
@@ -25,9 +25,6 @@ public class ReloadCommand extends SubCommand {
 
 	@Override
 	public boolean execute(CommandSender sender, String[] args) {
-		if(!hasPermission(sender)) {
-			return true;
-		}
 		Nah.plugin.settings = new Settings();
 		
 		Nah.plugin.gameManager = new GameManager();

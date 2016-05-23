@@ -10,7 +10,6 @@ public class GameCommand extends SubCommand {
 
 	public GameCommand() {
 		super("game", new String[]{"","g"}, 1);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

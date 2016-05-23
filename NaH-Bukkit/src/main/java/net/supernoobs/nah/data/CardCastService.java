@@ -52,13 +52,11 @@ public class CardCastService {
 				@Override
 				public void checkClientTrusted(java.security.cert.X509Certificate[] arg0, String arg1)
 						throws CertificateException {
-					// TODO Auto-generated method stub
 					
 				}
 				@Override
 				public void checkServerTrusted(java.security.cert.X509Certificate[] arg0, String arg1)
 						throws CertificateException {
-					// TODO Auto-generated method stub
 					
 				}
 	        }

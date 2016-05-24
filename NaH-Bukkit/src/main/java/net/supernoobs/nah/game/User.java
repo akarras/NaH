@@ -32,7 +32,7 @@ public class User {
 		state = MenuState.MainMenu;
 		lastMenuState = MenuState.MainMenu;
 		lastGameState = GameState.LOBBY;
-		inventoryClosed = false;
+		inventoryClosed = true;
 	}
 
 	public void sendMessage(String message) {

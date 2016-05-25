@@ -28,12 +28,15 @@ public class NahCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command commandExecuted, String label, String[] args) {
 		for(SubCommand command:subCommands) {
 			if(command.isTriggered(args)){
+				//Check if the command requires a permission
 				if(command.permissionRequired()) {
-					return command.execute(sender,args);
-				} else {
-					sender.sendMessage("§cYou lack permission to use this command.");
-					return true;
+					if(command.hasPermission(sender)) {
+						//Block the command as they don't have permission
+						sender.sendMessage("§cYou lack permission to use this command.");
+						return true;
+					}
 				}
+				return command.execute(sender,args);
 			}
 		}
 		return false;

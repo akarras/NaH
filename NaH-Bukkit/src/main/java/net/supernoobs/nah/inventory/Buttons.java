@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import net.md_5.bungee.api.ChatColor;
+import net.supernoobs.nah.Messages;
 import net.supernoobs.nah.Nah;
 import net.supernoobs.nah.data.CardCastDeck;
 import net.supernoobs.nah.data.JsonDeck;
@@ -22,7 +23,7 @@ public class Buttons {
 	public static ItemStack BrowseGames() {
 		ItemStack stack = new ItemStack(Material.SLIME_BLOCK);
 		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName("§eBrowse Games");
+		meta.setDisplayName(Messages.BrowseGames);
 		stack.setItemMeta(meta);
 		return stack;
 	}
@@ -30,7 +31,7 @@ public class Buttons {
 	public static ItemStack CreateNewGame() {
 		ItemStack stack = new ItemStack(Material.WOOL,1,(short) 5);
 		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName("§aNew Game");
+		meta.setDisplayName(Messages.NewGameButton);
 		stack.setItemMeta(meta);
 		return stack;
 	}
@@ -38,7 +39,7 @@ public class Buttons {
 	public static ItemStack BackToMainMenu() {
 		ItemStack stack = new ItemStack(Material.REDSTONE_BLOCK,1);
 		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName("§cBack to Main Menu");
+		meta.setDisplayName(Messages.BackToMain);
 		stack.setItemMeta(meta);
 		return stack;
 	}
@@ -46,6 +47,7 @@ public class Buttons {
 	public static ItemStack SupportCaHButton(){
 		ItemStack stack = new ItemStack(Material.BEACON);
 		ItemMeta meta = stack.getItemMeta();
+		// Removing this is disallowed, as attributing CaH for their game is a must.
 		meta.setDisplayName("§bCards Against Humanity");
 		meta.setLore(Arrays.asList("§bThis plugin wouldn't exist", "§bwithout them go buy a deck!",
 				"§bhttp://cardsagainsthumanity.com"));
@@ -73,7 +75,7 @@ public class Buttons {
 	public static ItemStack LeaveGameButton() {
 		ItemStack stack = new ItemStack(Material.REDSTONE_BLOCK);
 		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName("§cLeave Game");
+		meta.setDisplayName(Messages.LeaveGame);
 		stack.setItemMeta(meta);
 		return stack;
 	}
@@ -81,7 +83,7 @@ public class Buttons {
 	public static ItemStack StartGameButton() {
 		ItemStack stack = new ItemStack(Material.WOOL,1,(short)5);
 		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName("§aStart Game");
+		meta.setDisplayName(Messages.StartGame);
 		stack.setItemMeta(meta);
 		return stack;
 	}
@@ -89,7 +91,7 @@ public class Buttons {
 	public static ItemStack SettingsMenuButton(User user) {
 		ItemStack stack = new ItemStack(Material.WOOL,1,(short)4);
 		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName("§eSettings");
+		meta.setDisplayName(Messages.Settings);
 		Game game = user.getGame();
 		if(game == null) {
 			return null;
@@ -114,13 +116,13 @@ public class Buttons {
 	}
 	
 	public static ItemStack increaseRoundTimeButton() {
-		return getWoolWithName("§eIncrease Round Time",(short)5);
+		return getWoolWithName(Messages.IncreaseRoundTime,(short)5);
 	}
 	
 	public static ItemStack currentRoundTimeButton(User user) {
 		ItemStack stack = new ItemStack(Material.WOOL,1,(short)1);
 		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName("§eIdle Time");
+		meta.setDisplayName(Messages.CurrentRoundTime);
 		meta.setLore(Arrays.asList("§e"+user.getGame().getSettings().getRoundTime()+" Seconds",
 				"§eShift+Click to change","§e1 second at a time."));
 		stack.setItemMeta(meta);
@@ -128,29 +130,27 @@ public class Buttons {
 	}
 	
 	public static ItemStack decreaseRoundTimeButton() {
-		return getWoolWithName("§6Decrease Round Time",(short)14);
+		return getWoolWithName(Messages.DecreaseRoundTime,(short)14);
 	}
 	
 	public static ItemStack increaseScoreLimitButton() {
-		return getWoolWithName("§aIncrease Score Limit",(short)5);
+		return getWoolWithName(Messages.IncreaseScoreLimit,(short)5);
 	}
 	
 	public static ItemStack currentScoreButton(User user) {
 		ItemStack stack = new ItemStack(Material.WOOL,1,(short)1);
 		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName("§eCurrent Max Score");
+		meta.setDisplayName(Messages.CurrentScoreLimit);
 		meta.setLore(Arrays.asList("§e"+user.getGame().getSettings().getScoreLimit()));
 		stack.setItemMeta(meta);
 		return stack;
 	}
 	
 	public static ItemStack decreaseScoreLimitButton() {
-		return getWoolWithName("§6Decrease Score Limit",(short)14);
+		return getWoolWithName(Messages.DecreaseScoreLimit,(short)14);
 	}
 	
-	/*
-	 * 
-	 */
+
 	private static ItemStack getWoolWithName(String name, short woolColor){
 		ItemStack stack = new ItemStack(Material.WOOL,1,woolColor);
 		ItemMeta meta = stack.getItemMeta();
@@ -162,7 +162,7 @@ public class Buttons {
 	public static ItemStack backToLobbyButton() {
 		ItemStack stack = new ItemStack(Material.REDSTONE_BLOCK,1);
 		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName("§cBack to Lobby");
+		meta.setDisplayName(Messages.BackToLobby);
 		stack.setItemMeta(meta);
 		return stack;
 	}
@@ -171,7 +171,7 @@ public class Buttons {
 		ArrayList<String> lore = new ArrayList<String>();
 		ItemStack stack = new ItemStack(Material.PAPER);
 		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName("§6Deck Settings");
+		meta.setDisplayName(Messages.DeckSettings);
 		final GameSettings settings = user.getGame().getSettings();
 		lore.add(settings.getDecks().size()+ " Decks Enabled");
 		meta.setLore(lore);

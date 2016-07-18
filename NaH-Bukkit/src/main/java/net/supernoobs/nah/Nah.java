@@ -23,12 +23,13 @@ public class Nah extends JavaPlugin {
 	
 	public Logger nahLogger;
 	public Settings settings;
-	
+	public Messages messages;
 	
 	@Override
 	public void onEnable() {
 		plugin = this;
 		settings = new Settings();
+		messages = new Messages();
 		
 		gameManager = new GameManager();
 		userManager = new UserManager();

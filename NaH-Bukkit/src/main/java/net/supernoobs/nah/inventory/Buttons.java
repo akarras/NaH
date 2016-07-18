@@ -222,7 +222,7 @@ public class Buttons {
 	}
 	
 	public static ItemStack HelpMenuButton(User user) {
-		ItemStack stack = new ItemStack(Material.BOOK, 1,(short)7);
+		ItemStack stack = new ItemStack(Material.BOOK, 1);
 		ItemMeta meta = stack.getItemMeta();
 		meta.setDisplayName("§bHelp");
 		meta.setLore(Arrays.asList("§bClick to show help menu"));

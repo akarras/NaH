@@ -95,15 +95,21 @@ public class GameSettings {
 	}
 	
 	public void addCardCast(String cardCastCode) {
-		CardCastDeck deck = Nah.plugin.cardCast.DownloadDeck(cardCastCode);
-		if(deck != null) {
-			cardCastDecks.add(deck);
-			Nah.plugin.nahLogger.Log(LogLevel.NORMAL, "Added cardcast deck "
-				+deck.getName()+" "+deck.getDescription()+" "
-				+deck.getBlackCards().size()+" black cards "
-				+deck.getWhiteCards().size()+" white cards");
-		} else {
-			getHost().sendMessage("§cError getting CardCast deck");
-		}
+		Nah.plugin.getServer().getScheduler().runTaskAsynchronously(Nah.plugin, new Runnable() {
+			@Override
+			public void run() {
+				getHost().sendMessage("§aDownloading cardcast deck "+cardCastCode);
+				CardCastDeck deck = Nah.plugin.cardCast.DownloadDeck(cardCastCode);
+				if(deck != null) {
+					cardCastDecks.add(deck);
+					Nah.plugin.nahLogger.Log(LogLevel.NORMAL, "Added cardcast deck "
+						+deck.getName()+" "+deck.getDescription()+" "
+						+deck.getBlackCards().size()+" black cards "
+						+deck.getWhiteCards().size()+" white cards");
+				} else {
+					getHost().sendMessage("§cError getting CardCast deck");
+				}
+			}
+		});
 	}
 }

@@ -30,7 +30,7 @@ public class NahCommand implements CommandExecutor {
 			if(command.isTriggered(args)){
 				//Check if the command requires a permission
 				if(command.permissionRequired()) {
-					if(command.hasPermission(sender)) {
+					if(!command.hasPermission(sender)) {
 						//Block the command as they don't have permission
 						sender.sendMessage("§cYou lack permission to use this command.");
 						return true;

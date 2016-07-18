@@ -59,6 +59,7 @@ public class InventoryListener implements Listener {
 						return;
 					} else if(current.equals(Buttons.HelpMenuButton(user))) {
 						user.getPlayer().performCommand("nah help");
+						user.getPlayer().closeInventory();
 					}
 				}
 			} else if(inventoryName.equals(Inventories.nahPrefix+ChatColor.DARK_AQUA+"Card Cast Decks")) {

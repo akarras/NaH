@@ -221,6 +221,15 @@ public class Buttons {
 		return stack;
 	}
 	
+	public static ItemStack HelpMenuButton(User user) {
+		ItemStack stack = new ItemStack(Material.BOOK, 1,(short)7);
+		ItemMeta meta = stack.getItemMeta();
+		meta.setDisplayName("§bHelp");
+		meta.setLore(Arrays.asList("§bClick to show help menu"));
+		stack.setItemMeta(meta);
+		return stack;
+	}
+	
 	public static ItemStack PasswordInfoButton(User user) {
 		ItemStack stack = new ItemStack(Material.WOOL, 1,(short)6);
 		ItemMeta meta = stack.getItemMeta();
@@ -229,7 +238,7 @@ public class Buttons {
 		GameSettings settings = user.getGame().getSettings();
 		if(StringUtils.isBlank(settings.getGamePassword())){
 			lore.add("§7Use the command");
-			lore.add("§7/nah set password [password]");
+			lore.add("§7/nah password [password]");
 			lore.add("§7To add a password");
 		} else {
 			lore.add("§7Password: "+settings.getGamePassword());

@@ -57,6 +57,8 @@ public class InventoryListener implements Listener {
 						user.sendMessage("§bWebsite: http://cardsagainsthumanity.com");
 						event.getWhoClicked().closeInventory();
 						return;
+					} else if(current.equals(Buttons.HelpMenuButton(user))) {
+						user.getPlayer().performCommand("nah help");
 					}
 				}
 			} else if(inventoryName.equals(Inventories.nahPrefix+ChatColor.DARK_AQUA+"Card Cast Decks")) {

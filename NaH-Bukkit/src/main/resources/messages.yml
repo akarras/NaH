@@ -1,0 +1,16 @@
+buttons:
+  settings-menu:
+    increase-round-time: '&eIncrease Round Time'
+    current-round-time: '&eIdle Time'
+    decrease-round-time: '&6Decrease Round Time'
+    increase-score-limit: '&aIncrease Score Limit'
+    current-score-limit: '&eCurrent Max Score'
+    decrease-score-limit: '&6Decrease Score Limit'
+  browse-games: '&eBrowse Games'
+  new-game: '&aNew Game'
+  back-to-main: '&cBack to Main Menu'
+  leave-game: '&cLeave Game'
+  start-game: '&aStart Game'
+  back-to-lobby: '&cBack to Lobby'
+  deck-settings: '&6Deck Settings'
+  settings: '&eSettings'

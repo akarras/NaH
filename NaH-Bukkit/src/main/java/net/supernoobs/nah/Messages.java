@@ -1,6 +1,10 @@
 package net.supernoobs.nah;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -34,22 +38,26 @@ public class Messages {
 			Nah.plugin.saveResource("messages.yml", false);
 		}
 		messagesYaml = YamlConfiguration.loadConfiguration(messagesFile);
+		InputStream stream = Nah.plugin.getResource("messages.yml");
+		InputStreamReader reader = new InputStreamReader(stream);
+		YamlConfiguration defaultConfiguration = YamlConfiguration.loadConfiguration(reader);
+		messagesYaml.addDefaults(defaultConfiguration);
 		// Load button strings from the messages file
-		BrowseGames = readString("buttons.browse-games", "§eBrowse Games");
-		NewGameButton = readString("buttons.new-game", "§aNew Game");
-		BackToMain = readString("buttons.back-to-main", "§cBack to Main Menu");
-		LeaveGame = readString("buttons.leave-game", "§cLeave Game");
-		StartGame = readString("buttons.start-game", "§aStart Game");
-		BackToLobby = readString("buttons.back-to-lobby", "§cBack to Lobby");
-		DeckSettings = readString("buttons.deck-settings", "§6Deck Settings");
+		BrowseGames = readString("buttons.browse-games");
+		NewGameButton = readString("buttons.new-game");
+		BackToMain = readString("buttons.back-to-main");
+		LeaveGame = readString("buttons.leave-game");
+		StartGame = readString("buttons.start-game");
+		BackToLobby = readString("buttons.back-to-lobby");
+		DeckSettings = readString("buttons.deck-settings");
 		// Settings menu buttons
-		Settings = readString("buttons.settings", "§eSettings");
-		IncreaseRoundTime = readString("buttons.settings-menu.increase-round-time","§eIncrease Round Time");
-		CurrentRoundTime = readString("buttons.settings-menu.current-round-time", "§eIdle Time");
-		DecreaseRoundTime = readString("buttons.settings-menu.decrease-round-time", "§6Decrease Round Time");
-		IncreaseScoreLimit = readString("buttons.settings-menu.increase-score-limit", "§aIncrease Score Limit");
-		CurrentScoreLimit = readString("buttons.settings-menu.current-score-limit", "§eCurrent Max Score");
-		DecreaseScoreLimit = readString("buttons.settings-menu.decrease-score-limit", "§6Decrease Score Limit");
+		Settings = readString("buttons.settings");
+		IncreaseRoundTime = readString("buttons.settings-menu.increase-round-time");
+		CurrentRoundTime = readString("buttons.settings-menu.current-round-time");
+		DecreaseRoundTime = readString("buttons.settings-menu.decrease-round-time");
+		IncreaseScoreLimit = readString("buttons.settings-menu.increase-score-limit");
+		CurrentScoreLimit = readString("buttons.settings-menu.current-score-limit");
+		DecreaseScoreLimit = readString("buttons.settings-menu.decrease-score-limit");
 		
 		// Load inventory strings from the messages file
 		// TODO Actually add inventory strings
@@ -57,6 +65,7 @@ public class Messages {
 		
 		// Resave our configuration file in-case the path was not found, the resaved values will then be able to be changed
 		try {
+			
 			messagesYaml.save(messagesFile);
 		} catch (Exception e) {
 			
@@ -64,9 +73,13 @@ public class Messages {
 	}
 	
 	// Helper method to translate color codes that may be used in the configuration file as we read
-	public String readString(String path, String defaultValue){
-		String message = messagesYaml.getString(path, defaultValue);
-		message = ChatColor.translateAlternateColorCodes('§', message);
+	public String readString(String path){
+		//If the path is not found, we should save it from the default config to allow player modification
+		if(!messagesYaml.contains(path, true)) {
+			messagesYaml.set(path, messagesYaml.getString(path));
+		}
+		String message = messagesYaml.getString(path);
+		message = ChatColor.translateAlternateColorCodes('&', message);
 		message = ChatColor.translateAlternateColorCodes('&', message);
 		return message;
 	}
